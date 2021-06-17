@@ -1,11 +1,5 @@
 <x-guest-layout>
     <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo />
-            </a>
-        </x-slot>
-
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
