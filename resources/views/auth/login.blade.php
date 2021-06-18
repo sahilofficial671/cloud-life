@@ -42,12 +42,12 @@
                 </div>
                 <div>
                     @if (Route::has('password.request'))
-                        <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                        <a class="underline text-sm lg:mr-2 text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
                             {{ __('Forgot your password?') }}
                         </a>
                     @endif
 
-                    <x-button class="ml-3">
+                    <x-button type="submit" class="ml-30">
                         {{ __('Log in') }}
                     </x-button>
                 </div>

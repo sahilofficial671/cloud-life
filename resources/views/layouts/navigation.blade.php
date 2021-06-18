@@ -11,11 +11,11 @@
                 </div>
 
                 <!-- Navigation Links -->
-                {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('finance')" :active="Str::startsWith(request()->route()->getName(), 'finance')">
-                        {{ __('Finance') }}
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('vehicles.index')" :active="Str::startsWith(request()->route()->getName(), 'vehicles')">
+                        {{ __('Vehicles') }}
                     </x-nav-link>
-                </div> --}}
+                </div>
             </div>
 
             @guest

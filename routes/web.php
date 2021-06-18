@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Vehicle\VehicleController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,4 +22,6 @@ Route::get('/', function () {
 
 Route::group(["middleware" => ['auth', 'verified']], function(){
     Route::get('/dashboard', function () { return view('dashboard');})->name('dashboard');
+
+    Route::resource('vehicles', VehicleController::class);
 });
