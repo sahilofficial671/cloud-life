@@ -24,4 +24,5 @@ Route::group(["middleware" => ['auth', 'verified']], function(){
     Route::get('/dashboard', function () { return view('dashboard');})->name('dashboard');
 
     Route::resource('vehicles', VehicleController::class);
+    Route::post('vehicles/destroy/bulk', [VehicleController::class, 'destroyBulk'])->name('vehicles.destroy.bulk');
 });

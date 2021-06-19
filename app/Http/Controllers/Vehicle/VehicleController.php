@@ -34,7 +34,7 @@ class VehicleController extends Controller
      * Store a newly created vehicle in database.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -99,5 +99,26 @@ class VehicleController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyBulk(Request $request)
+    {
+        $validator = validator($request->all(), [
+            'vehicles' => ['required', 'array', 'exists:vehicles,id'],
+        ]);
+
+        if($validator->fails()){
+            return back()->with(['error' => $validator->errors()->first()]);
+        }
+
+        $request->user()->vehicles()->whereIn('id', $request->vehicles)->delete();
+
+        return back()->with(['success' => "Successfully Deleted. Vehicle ID: ".implode(',', $request->vehicles)]);
     }
 }
