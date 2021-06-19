@@ -41,6 +41,17 @@
                         </table>
 
                         <div class="px-5 py-2">
+                            @if (!$vehicles->hasPages())
+                                <p class="text-sm text-gray-700 leading-5">
+                                    {!! __('Showing') !!}
+                                    <span class="font-medium">{{ $vehicles->firstItem() }}</span>
+                                    {!! __('to') !!}
+                                    <span class="font-medium">{{ $vehicles->lastItem() }}</span>
+                                    {!! __('of') !!}
+                                    <span class="font-medium">{{ $vehicles->total() }}</span>
+                                    {!! __('results') !!}
+                                </p>
+                            @endif
                             {{ $vehicles->links() }}
                         </div>
                     </div>

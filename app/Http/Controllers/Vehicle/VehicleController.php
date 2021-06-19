@@ -17,7 +17,7 @@ class VehicleController extends Controller
      */
     public function index(Request $request)
     {
-        return view('vehicle.index', ['vehicles' => $request->user()->vehicles()->paginate(10)]);
+        return view('vehicle.index', ['vehicles' => $request->user()->vehicles()->paginate(15)]);
     }
 
     /**
