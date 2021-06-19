@@ -18,15 +18,34 @@
                             @csrf
 
                             <div class="my-3">
-                                <x-label for="name" :value="__('Name')" />
-                                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+                                <x-label for="name" :value="__('Name')" class="mb-1"/>
+                                <x-input id="model" class="block mt-1 w-full" type="text" name="model" :value="old('model')" required autofocus />
                             </div>
 
                             <div class="my-3">
-                                <x-label for="detail" :value="__('Detail')" />
+                                <x-label for="detail" :value="__('Detail')" class="mb-1" />
                                 <x-textarea id="detail" class="block mt-1 w-full" type="textarea" name="detail" :value="old('detail')" required />
                             </div>
 
+                            <div class="my-3">
+                                <x-label for="category_id" :value="__('Category')" class="mb-1" />
+                                <x-select name="category_id" id="category_id" required>
+                                    <option>{{ __('Select Category') }}</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </x-select>
+                            </div>
+
+                            <div class="my-3">
+                                <x-label for="manufacturer" :value="__('Manufacturer')" class="mb-1"/>
+                                <x-input id="manufacturer" class="block mt-1 w-full" type="text" name="manufacturer" :value="old('manufacturer')" required autofocus />
+                            </div>
+
+                            <div class="my-3">
+                                <x-label for="rc" :value="__('RC')" class="mb-1"/>
+                                <x-input id="rc" class="block mt-1 w-full" type="text" name="rc" :value="old('rc')" required autofocus />
+                            </div>
                             <x-button type="submit">
                                 {{ __('Create') }}
                             </x-button>

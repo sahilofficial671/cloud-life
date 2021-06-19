@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Vehicle;
+use App\Models\VehicleCategory;
 
 class VehicleController extends Controller
 {
@@ -27,7 +28,7 @@ class VehicleController extends Controller
      */
     public function create()
     {
-        return view('vehicle.create');
+        return view('vehicle.create', ['categories' => VehicleCategory::all()]);
     }
 
     /**
@@ -39,25 +40,24 @@ class VehicleController extends Controller
     public function store(Request $request)
     {
         $validator = validator($request->all(), [
-            'name'        => ['required', 'string'],
+            'model'       => ['required', 'string'],
             'detail'      => ['required', 'string'],
+            'manufacturer'=> ['required', 'string'],
+            'rc'          => ['required', 'string'],
+            'category_id' => ['required', 'integer', 'exists:vehicle_categories,id']
         ]);
 
         if($validator->fails()){
             return back()->with(['error' => $validator->errors()->first()]);
         }
 
-        Vehicle::create([
-            'name'        => $request->name,
-            'detail'      => $request->detail,
-            'user_id'     => $request->user()->id,
-        ]);
+        $request->user()->vehicles()->create($validator->validated());
 
         return redirect()->route('vehicles.index')->with(['success' => 'Successfully Created.']);
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified vehicle.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -65,12 +65,12 @@ class VehicleController extends Controller
     public function show(Request $request, $id)
     {
         return view('vehicle.show', [
-            'vehicle' => $request->user()->vehicles()->where('id', $id)->firstOrFail(),
+            'vehicle' => $request->user()->vehicles()->findOrFail($id),
         ]);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified vehicle.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -81,7 +81,7 @@ class VehicleController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified vehicle in database.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -93,7 +93,7 @@ class VehicleController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified vehicle from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -104,7 +104,7 @@ class VehicleController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified vehicle from storage.
      *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response

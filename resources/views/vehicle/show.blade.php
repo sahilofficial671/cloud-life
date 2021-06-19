@@ -14,8 +14,8 @@
                             <div class="flex items-center">
                                 <div><img src="{{ asset('images/bike/bike-image.svg') }}" alt="Bike" class="inline-flex mr-3"></div>
                                 <div class="details inline-flex flex-col items-start pt-1">
-                                    <div class="text-sm text-indigo-600 font-semibold">Bike</div>
-                                    <h4 class="text-lg font-semibold">{{ __($vehicle->name) }}</h4>
+                                    <div class="text-sm text-indigo-600 font-semibold">{{$vehicle->category->name }}</div>
+                                    <h4 class="text-lg font-semibold">{{ __($vehicle->model) }}</h4>
                                     <span class="bg-gray-100 px-2 py-1 text-xs rounded font-semibold">{{ $vehicle->rc }}</span>
                                 </div>
                             </div>
