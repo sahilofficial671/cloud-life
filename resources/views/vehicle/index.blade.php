@@ -27,14 +27,15 @@
                     </div>
                     <x-alert type="success" />
                     <x-alert type="error" />
-                    <div class="bg-white border-b border-gray-200 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="bg-white border-b border-gray-200 overflow-hidden shadow-sm sm:rounded-lg overflow-x-auto">
                         <table class="table w-full whitespace-nowrap overflow-y-auto">
                             <thead>
                                 <tr class="focus:outline-none h-14 w-full text-sm leading-none text-gray-800">
                                     <th scope="col"></th>
                                     <th scope="col">ID</th>
                                     <th scope="col" class="text-left">Name</th>
-                                    <th scope="col" class="text-left">Description</th>
+                                    <th scope="col" class="text-left">Detail</th>
+                                    <th scope="col" class="text-left">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,7 +47,12 @@
                                     </td>
                                     <td class="w-20 text-center"><span class="bg-gray-100 px-2 py-1 text-xs rounded group-hover:bg-white">ID: {{ $vehicle->id }}</span></td>
                                     <td>{{ $vehicle->name }}</td>
-                                    <td>{{ $vehicle->description }}</td>
+                                    <td>{{ $vehicle->detail }}</td>
+                                    <td>
+                                        <a href="{{ route('vehicles.show', $vehicle->id) }}">
+                                            <x-button buttonType="light" type="button">View</x-button>
+                                        </a>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>

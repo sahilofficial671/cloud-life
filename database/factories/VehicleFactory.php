@@ -22,9 +22,11 @@ class VehicleFactory extends Factory
     public function definition()
     {
         return [
-            'name'        => collect(['Bike', 'Car', 'Auto', 'Truck'])->random(),
-            'description' => 'Vehicle Description',
-            'user_id'     => 1
+            'name'         => collect(['Twister', 'Pulser', 'Apache 4v', 'Splender'])->random(),
+            'detail'       => $this->faker->text(50),
+            'manufacturer' => collect(['Honda', 'Bajaj', 'KTM', 'Royal Enfield', 'Hero'])->random(),
+            'rc'           => $this->faker->regexify('[A-Z]{6}[0-6]{3}'),
+            'user_id'      => 1
         ];
     }
 }

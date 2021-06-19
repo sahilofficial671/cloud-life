@@ -40,7 +40,7 @@ class VehicleController extends Controller
     {
         $validator = validator($request->all(), [
             'name'        => ['required', 'string'],
-            'description' => ['required', 'string'],
+            'detail'      => ['required', 'string'],
         ]);
 
         if($validator->fails()){
@@ -49,7 +49,7 @@ class VehicleController extends Controller
 
         Vehicle::create([
             'name'        => $request->name,
-            'description' => $request->description,
+            'detail'      => $request->detail,
             'user_id'     => $request->user()->id,
         ]);
 
@@ -62,9 +62,11 @@ class VehicleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        return view('vehicle.show', [
+            'vehicle' => $request->user()->vehicles()->where('id', $id)->firstOrFail(),
+        ]);
     }
 
     /**
