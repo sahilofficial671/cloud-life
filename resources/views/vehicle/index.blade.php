@@ -10,7 +10,7 @@
                 <form method="POST" action="{{route('vehicles.destroy.bulk')}}" x-data="component()">
                     @csrf
                     <div class="pb-3 text-right">
-                        <a href="{{route('vehicles.create')}}"><x-button type="button" buttonType="secondary">{{ __('Add New') }}</x-button></a>
+                        <a href="{{route('vehicles.create')}}"><x-button type="button">{{ __('Add New') }}</x-button></a>
                         <x-button buttonType="danger" type="submit" x-bind:disabled="items.length == 0">{{ __('Delete') }}</x-button>
                     </div>
                     <x-alert type="success" />

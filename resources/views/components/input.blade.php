@@ -11,7 +11,7 @@
         'text'     => ' rounded-md focus:border-green-300 focus:ring-green-200',
         'number'   => ' rounded-md focus:border-green-300 focus:ring-green-200',
         'email'    => ' rounded-md focus:border-green-300 focus:ring-green-200',
-        'checkbox' => ' rounded h-5 w-5 checked:text-green-600 text-green-600 focus:outline-none focus:ring-green-200',
+        'checkbox' => ' rounded h-5 w-5 checked:text-blue-600 text-blue-600 focus:outline-none focus:ring-blue-200',
     ][$type];
 
 @endphp
