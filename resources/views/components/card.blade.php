@@ -11,6 +11,10 @@
         </div>
     @endisset
 
+    @isset($tabs)
+        {{ $tabs }}
+    @endisset
+
     @isset($body)
         {{ $body }}
     @endisset

@@ -20,6 +20,7 @@ class CreateVehiclesTable extends Migration
             $table->string('manufacturer');
             $table->string('rc');
             $table->foreignId('user_id')->constrained();
+            $table->integer('monthly_service_in_days');
             $table->softDeletes();
             $table->timestamps();
         });

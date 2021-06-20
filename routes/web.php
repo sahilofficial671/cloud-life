@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Vehicle\VehicleController;
+use App\Http\Controllers\Vehicle\VehicleServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +26,5 @@ Route::group(["middleware" => ['auth', 'verified']], function(){
 
     Route::resource('vehicles', VehicleController::class);
     Route::post('vehicles/destroy/bulk', [VehicleController::class, 'destroyBulk'])->name('vehicles.destroy.bulk');
+    Route::get('vehicles/{vehicle_id}/services/{service_id}/destroy', [VehicleServiceController::class, 'destroy'])->name('vehicles.services.destroy');
 });

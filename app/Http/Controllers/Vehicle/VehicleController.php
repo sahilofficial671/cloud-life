@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Vehicle;
 use App\Models\VehicleCategory;
+use App\Models\VehicleService;
 
 class VehicleController extends Controller
 {
@@ -40,11 +41,12 @@ class VehicleController extends Controller
     public function store(Request $request)
     {
         $validator = validator($request->all(), [
-            'model'       => ['required', 'string'],
-            'detail'      => ['required', 'string'],
-            'manufacturer'=> ['required', 'string'],
-            'rc'          => ['required', 'string'],
-            'category_id' => ['required', 'integer', 'exists:vehicle_categories,id']
+            'model'                   => ['required', 'string'],
+            'detail'                  => ['required', 'string'],
+            'manufacturer'            => ['required', 'string'],
+            'rc'                      => ['required', 'string'],
+            'monthly_service_in_days' => ['required', 'integer'],
+            'category_id'             => ['required', 'integer', 'exists:vehicle_categories,id']
         ]);
 
         if($validator->fails()){
@@ -64,43 +66,12 @@ class VehicleController extends Controller
      */
     public function show(Request $request, $id)
     {
+        $vehicle = $request->user()->vehicles()->findOrFail($id);
+
         return view('vehicle.show', [
-            'vehicle' => $request->user()->vehicles()->findOrFail($id),
+            'vehicle'  => $vehicle,
+            'services' => $vehicle->services()->orderBy('scheduled_at', 'desc')->get()
         ]);
-    }
-
-    /**
-     * Show the form for editing the specified vehicle.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified vehicle in database.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified vehicle from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 
     /**

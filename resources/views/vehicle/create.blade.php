@@ -46,6 +46,12 @@
                                 <x-label for="rc" :value="__('RC')" class="mb-1"/>
                                 <x-input id="rc" class="block mt-1 w-full" type="text" name="rc" :value="old('rc')" required autofocus />
                             </div>
+
+                            <div class="my-3">
+                                <x-label for="monthly_service_in_days" :value="__('Monthly Service In Days')" class="mb-1"/>
+                                <x-input id="monthly_service_in_days" class="block mt-1 w-full" type="text" name="monthly_service_in_days" :value="old('monthly_service_in_days')" required autofocus />
+                            </div>
+
                             <x-button type="submit">
                                 {{ __('Create') }}
                             </x-button>

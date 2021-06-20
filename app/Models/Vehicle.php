@@ -15,6 +15,7 @@ class Vehicle extends Model
         'detail',
         'manufacturer',
         'rc',
+        'monthly_service_in_days',
         'user_id',
         'category_id'
     ];
@@ -37,5 +38,15 @@ class Vehicle extends Model
     public function category()
     {
         return $this->belongsTo(VehicleCategory::class, 'category_id');
+    }
+
+    /**
+     * Get all of the services for the Vehicle
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function services()
+    {
+        return $this->hasMany(VehicleService::class,);
     }
 }

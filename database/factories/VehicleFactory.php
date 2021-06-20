@@ -22,12 +22,13 @@ class VehicleFactory extends Factory
     public function definition()
     {
         return [
-            'model'        => collect(['Twister', 'Pulser', 'Apache 4v', 'Splender'])->random(),
-            'detail'       => $this->faker->text(50),
-            'manufacturer' => collect(['Honda', 'Bajaj', 'KTM', 'Royal Enfield', 'Hero'])->random(),
-            'rc'           => $this->faker->regexify('[A-Z]{6}[0-6]{3}'),
-            'category_id'  => 1,
-            'user_id'      => 1
+            'model'                   => collect(['Twister', 'Pulser', 'Apache 4v', 'Splender'])->random(),
+            'detail'                  => $this->faker->text(50),
+            'manufacturer'            => collect(['Honda', 'Bajaj', 'KTM', 'Royal Enfield', 'Hero'])->random(),
+            'rc'                      => $this->faker->regexify('[A-Z]{6}[0-6]{3}'),
+            'monthly_service_in_days' => 22,
+            'category_id'             => 1,
+            'user_id'                 => 1
         ];
     }
 }
