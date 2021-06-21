@@ -70,7 +70,7 @@ class VehicleController extends Controller
 
         return view('vehicle.show', [
             'vehicle'  => $vehicle,
-            'services' => $vehicle->services()->orderBy('scheduled_at', 'desc')->limit(6)->get()
+            'services' => $vehicle->services()->orderBy('scheduled_at', 'desc')->limit(10)->get()
         ]);
     }
 
