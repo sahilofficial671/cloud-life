@@ -1,3 +1,5 @@
+@props(['container' => 'w-full'])
+
 @php
     $class = 'border-2 shadow-sm rounded px-2 py-2 my-2 flex justify-between items-center pl-3 text-sm bg-opacity-80';
     $iconClass = 'flex items-center border-2 justify-center h-10 w-10 flex-shrink-0 rounded-full mr-2';
@@ -31,7 +33,7 @@
 
 @foreach (['success', 'error', 'info', 'warning'] as $type)
     @if (session()->has($type))
-    <div x-data="{ isHidden: false }" class="w-full">
+    <div x-data="{ isHidden: false }" class="{!! $container !!}">
         <div {{ $attributes->merge(['class' => $types[$type]['class']])}}  :class="{'hidden': isHidden }">
             <div class="flex items-center">
                 <div class="{!! $types[$type]['icon_class'] !!}">
