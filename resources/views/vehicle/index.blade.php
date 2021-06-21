@@ -5,7 +5,7 @@
     </x-slot>
 
     <div class="py-10">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl px-3 mx-auto sm:px-6 lg:px-8">
             <div>
                 <form method="POST" action="{{route('vehicles.destroy.bulk')}}" x-data="component()">
                     @csrf
@@ -30,25 +30,25 @@
                     <div class="bg-white border-b border-gray-200 overflow-hidden shadow-sm sm:rounded-lg overflow-x-auto">
                         <table class="table w-full whitespace-nowrap overflow-y-auto">
                             <thead>
-                                <tr class="focus:outline-none h-14 w-full text-sm leading-none text-gray-800">
+                                <tr class="focus:outline-none h-8 sm:h14 w-full text-sm leading-none text-gray-800">
                                     <th scope="col"></th>
-                                    <th scope="col">ID</th>
+                                    <th scope="col" class="text-center">ID</th>
                                     <th scope="col" class="text-left">Model</th>
                                     <th scope="col" class="text-left">Detail</th>
-                                    <th scope="col" class="text-left">Actions</th>
+                                    <th scope="col" class="text-center">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($vehicles as $vehicle)
                                 <tr class="group focus:outline-none h-16 text-sm leading-none text-gray-800 bg-white hover:bg-gray-100 border-b border-t border-gray-100">
-                                    <td class="w-20 text-center">
+                                    <td class="w-20 sm:w-10 p-2 text-center">
                                         <x-input type="checkbox" name="vehicles[]" value="{{$vehicle->id}}"
                                             x-bind:checked="itemSelected({{$vehicle->id}})" x-on:change="toggleItem({{$vehicle->id}})"/>
                                     </td>
-                                    <td class="w-20 text-center"><span class="bg-gray-100 px-2 py-1 text-xs rounded group-hover:bg-white">ID: {{ $vehicle->id }}</span></td>
-                                    <td>{{ $vehicle->model }}</td>
-                                    <td>{{ $vehicle->detail }}</td>
-                                    <td>
+                                    <td class="w-20 sm:w-4 p-2 text-center"><span class="bg-gray-100 px-2 py-1 text-xs rounded group-hover:bg-white">ID: {{ $vehicle->id }}</span></td>
+                                    <td class="w-20 p-2">{{ $vehicle->model }}</td>
+                                    <td class="w-20 p-2">{{ $vehicle->detail }}</td>
+                                    <td class="w-20 p-2 text-center">
                                         <a href="{{ route('vehicles.show', $vehicle->id) }}">
                                             <x-button buttonType="light" type="button">View</x-button>
                                         </a>
