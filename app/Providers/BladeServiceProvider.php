@@ -39,7 +39,6 @@ class BladeServiceProvider extends ServiceProvider
                                 </div>';
                 $message.= '</div>';
             $message .= '<?php } ?>';
-
             return $message;
         });
 

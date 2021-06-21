@@ -26,5 +26,12 @@ Route::group(["middleware" => ['auth', 'verified']], function(){
 
     Route::resource('vehicles', VehicleController::class);
     Route::post('vehicles/destroy/bulk', [VehicleController::class, 'destroyBulk'])->name('vehicles.destroy.bulk');
-    Route::get('vehicles/{vehicle_id}/services/{service_id}/destroy', [VehicleServiceController::class, 'destroy'])->name('vehicles.services.destroy');
+
+    // Vehicle Services
+    Route::prefix('vehicles/{vehicle_id}/services')->name('vehicles.services')->group(function(){
+        Route::post('/', [VehicleServiceController::class, 'store'])->name('.store');
+        Route::get('/create', [VehicleServiceController::class, 'create'])->name('.create');
+        Route::get('/{service_id}/destroy', [VehicleServiceController::class, 'destroy'])->name('.destroy');
+    });
+
 });

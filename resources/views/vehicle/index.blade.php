@@ -25,8 +25,7 @@
                               </svg>
                         </x-button>
                     </div>
-                    <x-alert type="success" />
-                    <x-alert type="error" />
+                    <x-alert />
                     <div class="bg-white border-b border-gray-200 overflow-hidden shadow-sm sm:rounded-lg overflow-x-auto">
                         <table class="table w-full whitespace-nowrap overflow-y-auto">
                             <thead>

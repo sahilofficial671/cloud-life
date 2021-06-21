@@ -4,7 +4,8 @@
     </x-slot>
 
     <div class="py-10" x-data="{ open: false }">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 px-2">
+        <div class="max-w-7xl px-3 mx-auto sm:px-6 lg:px-8">
+            <x-back href="{{ route('vehicles.index') }}" />
             <div class="sm:max-w-lg mx-auto">
                 @alertSuccess
                 @alertError
@@ -31,8 +32,20 @@
 
             <x-card width="sm:max-w-lg" class="mx-auto mt-3" x-data="{activeTab: 1}">
                 <x-slot name="tabs">
-                    <div class="tabs flex border-b-2 border-indigo-300">
-                        <div x-on:click="activeTab = 1" class="px-4 py-3 text-md font-semibold cursor-pointer hover:bg-indigo-50 -m-0.5" :class="{'text-indigo-700 border-b-2 border-indigo-700' : activeTab == 1}">Services</div>
+                    <div class="tabs flex border-b-2 border-indigo-300 items-center justify-between h-12">
+                        <div class="left">
+                            <div x-on:click="activeTab = 1" class="px-4 py-3 text-md font-semibold cursor-pointer hover:bg-indigo-50 -m-0.5" :class="{'text-indigo-700 border-b-2 border-indigo-700' : activeTab == 1}">Services</div>
+                        </div>
+                        <div class="right pr-4 flex items-center">
+                            <a href="{{ route('vehicles.services.create', [ 'vehicle_id' => $vehicle->id]) }}" class="py-2 pt-3">
+                                <x-button type="submit" buttonType="secondary" withIcon="true" class="sm:px-1 sm:py-1 sm:h-7">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                    </svg>
+                                </x-button>
+                            </a>
+                        </div>
+
                     </div>
                 </x-slot>
                 <x-slot name="body">
@@ -68,25 +81,29 @@
                                                 </svg>
                                             </div>
                                             <span class="text-xs font-semibold sm:text-sm text-gray-700 text-opacity-{{$textOpacity}}">
-                                                @if ($service->isPending())
-                                                    {{ $service->scheduledAt()->toFormattedDateString()}}</span>
-                                                @else
-                                                    {{ $service->servicedAt()->toFormattedDateString()}}</span>
-                                                @endif
+                                                {{
+                                                    $service->isPending()
+                                                        ?  $service->scheduledAt()->toFormattedDateString()
+                                                        : $service->servicedAt()->toFormattedDateString()
+                                                }}
                                         </div>
                                     </div>
                                 </div>
                                 <div class="pt-2">
                                     @if ($service->isPending())
+                                    <div class="flex items-center space-x-2">
                                         <a href="{{ route('vehicles.services.destroy', [ 'vehicle_id' => $vehicle->id, 'service_id' => $service->id]) }}">
-                                            <x-button type="submit" buttonType="light-success" withIcon="true">
+                                            <x-button type="submit" buttonType="light-success" withIcon="true" class="sm:h-9 sm:px-2">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                                 </svg>
                                             </x-button>
                                         </a>
+
+                                    </div>
+
                                     @else
-                                    <x-button buttonType="light-success" withIcon="true" disabled="disabled" class="hover:bg-green-200">
+                                    <x-button buttonType="light-success" withIcon="true" disabled="disabled" class="sm:h-9 sm:px-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                         </svg>

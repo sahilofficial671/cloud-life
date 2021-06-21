@@ -7,11 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\Traits\Vehicle\HasCarbonDates;
-use App\Traits\Vehicle\HasServiceStasuses;
+use App\Traits\Vehicle\Service\HasServiceStasuses;
+use App\Traits\Vehicle\Service\HasServiceTypes;
 
 class VehicleService extends Model
 {
-    use HasFactory, SoftDeletes, HasCarbonDates, HasServiceStasuses;
+    use HasFactory, SoftDeletes, HasCarbonDates, HasServiceStasuses, HasServiceTypes;
+
+    const TYPE_MONTHLY = 1;
+    const TYPE_CUSTOM = 2;
 
     protected $fillable = [
         'name',
@@ -19,6 +23,6 @@ class VehicleService extends Model
         'vehicle_id',
         'type_id',
         'scheduled_at',
-        'serviced_at'
+        'serviced_at',
     ];
 }

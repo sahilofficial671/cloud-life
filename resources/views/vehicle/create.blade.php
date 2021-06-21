@@ -4,11 +4,11 @@
     </x-slot>
 
     <div class="py-10" x-data="{ open: false }">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl px-3 mx-auto sm:px-6 lg:px-8">
             <x-back href="{{ route('vehicles.index') }}" />
             @alertSuccess
             @alertError
-            <div class="flex flex-col items-center mx-2">
+            <div class="flex flex-col items-center">
                 <x-card>
                     <x-slot name="header">
                         Create New Vehicle

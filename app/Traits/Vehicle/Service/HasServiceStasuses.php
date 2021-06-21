@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits\Vehicle;
+namespace App\Traits\Vehicle\Service;
 
 use Carbon\Carbon;
 
