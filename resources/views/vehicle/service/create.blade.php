@@ -38,7 +38,7 @@
                                 <x-select name="type_id" id="type_id">
                                     <option>{{ __('Select Type') }}</option>
                                     @foreach ($types as $id => $type)
-                                        <option value="{{ $id }}">{{ $type }}</option>
+                                        <option value="{{ $id }}" {{ old('type_id') == $id ? 'selected' : ''}}>{{ $type }}</option>
                                     @endforeach
                                 </x-select>
                             </div>
@@ -51,8 +51,8 @@
                             <div class="my-3 sm:my-6">
                                 <x-label for="description" :value="__('Description')" class="mb-1" />
                                 <x-textarea id="description" class="block mt-1 w-full" type="textarea" name="description" :value="old('description')" required />
-                            </div>
 
+                            </div>
                             <x-button type="submit">
                                 {{ __('Create') }}
                             </x-button>
