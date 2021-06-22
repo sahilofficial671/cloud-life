@@ -68,9 +68,18 @@ class VehicleController extends Controller
     {
         $vehicle = $request->user()->vehicles()->findOrFail($id);
 
+        // Get, first sort by scheduled at then sort by pending status
+        $services = $vehicle->services()
+                            ->orderBy('scheduled_at', 'desc')
+                            ->limit(10)
+                            ->get()
+                            ->sortByDesc(function($service) {
+                                    return $service->isOnlyPending();
+                            });
+
         return view('vehicle.show', [
             'vehicle'  => $vehicle,
-            'services' => $vehicle->services()->orderBy('scheduled_at', 'desc')->limit(10)->get()
+            'services' => $services
         ]);
     }
 

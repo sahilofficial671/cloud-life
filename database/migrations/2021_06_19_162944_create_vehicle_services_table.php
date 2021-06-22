@@ -21,6 +21,8 @@ class CreateVehicleServicesTable extends Migration
             $table->foreignId('vehicle_id')->constrained();
             $table->timestamp('scheduled_at');
             $table->timestamp('serviced_at')->nullable();
+            $table->timestamp('completed_at')->nullable();
+            $table->timestamp('canceled_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

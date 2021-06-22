@@ -23,6 +23,14 @@ class VehicleServiceSeeder extends Seeder
         ]);
 
         VehicleService::create([
+            'name'         => 'Custom Break Service',
+            'description'  => 'Bike Monthly Service',
+            'vehicle_id'   => 1,
+            'type_id'      => 2,
+            'scheduled_at' => now()->addMonth(),
+        ]);
+
+        VehicleService::create([
             'name'         => 'Monthly Service',
             'description'  => 'Bike Monthly Service',
             'vehicle_id'   => 1,

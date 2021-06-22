@@ -48,14 +48,25 @@
 
                     </div>
                 </x-slot>
+
                 <x-slot name="body">
                     <div>
 
                         <div class="services" x-show="activeTab == 1">
+
+                            @if ($services->isEmpty())
+                                <div class="text-sm px-2 py-4 text-gray-700 text-center">No services yet.</div>
+                            @endif
+
                             @foreach ($services as $service)
                             @php
-                                $color = $service->isPending() ? 'indigo' : 'green';
-                                $textOpacity = $service->isPending() ? '100' : '50';
+
+                                $color = $service->isOnlyPending() ? 'indigo' : 'green';
+                                $textOpacity = $service->isOnlyPending() ? '100' : '50';
+
+                                if($service->isCanceled()){
+                                    $color = 'red';
+                                }
                             @endphp
                             <div class="flex justify-between items-start md:my-8 md:px-8 my-3 px-3">
                                 <div class="flex items-start">
@@ -65,7 +76,7 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                         </svg>
 
-                                        @if ($service->isPending())
+                                        @if ($service->isOnlyPending())
                                         <svg xmlns="http://www.w3.org/2000/svg" class="absolute -top-1 -right-1 h-5 w-5 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
                                             <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
                                         </svg>
@@ -90,24 +101,79 @@
                                     </div>
                                 </div>
                                 <div class="pt-2">
-                                    @if ($service->isPending())
+                                    @if ($service->isOnlyPending())
                                     <div class="flex items-center space-x-2">
-                                        <a href="{{ route('vehicles.services.destroy', [ 'vehicle_id' => $vehicle->id, 'service_id' => $service->id]) }}">
-                                            <x-button type="submit" buttonType="light-success" withIcon="true" class="sm:h-9 sm:px-2">
+
+                                        @if ($service->isMonthly())
+                                        <a href="{{ route('vehicles.services.serviced', [ 'vehicle_id' => $vehicle->id, 'service_id' => $service->id]) }}" x-data="{ tooltip: false }">
+                                            <x-button type="submit" buttonType="light-success" withIcon="true" class="sm:h-9 sm:px-2" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                                 </svg>
                                             </x-button>
+
+                                            <div class="relative">
+                                                <div class="absolute text-center -top-10 z-50 w-32 md:w-52 px-2 py-1 -mt-1 text-sm leading-tight transform transition duration-500 ease-in-out   -translate-x-1/2 -translate-y-full bg-gray-700 text-gray-100 border-gray-500 border-2 rounded shadow-sm"
+                                                x-show="tooltip">
+                                                <span class="font-semibold">Mark Serviced</span> <br /><span class="text-xs text-gray-500 pl-2">This will also create next service.</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        @endif
+
+                                        <a href="{{ route('vehicles.services.complete', [ 'vehicle_id' => $vehicle->id, 'service_id' => $service->id]) }}" x-data="{ tooltip: false }">
+
+                                            <x-button type="submit" buttonType="secondary" withIcon="true" class="sm:h-9 sm:px-2" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                                                  </svg>
+                                            </x-button>
+
+                                            <div class="relative z-50">
+                                                <div class="absolute text-center -top-10 z-50 w-32 md:w-52 px-2 py-1 -mt-1 text-sm leading-tight transform transition duration-500 ease-in-out   -translate-x-1/2 -translate-y-full bg-gray-700 text-gray-100 border-gray-500 border-2 rounded shadow-sm"
+                                                x-show="tooltip">
+                                                <span class="font-semibold">Mark Completed</span>
+                                                <br />
+                                                <span class="text-xs text-gray-500 pl-2">Service will be completed.</span>
+                                                </div>
+                                            </div>
+                                        </a>
+
+                                        <a href="{{ route('vehicles.services.cancel', [ 'vehicle_id' => $vehicle->id, 'service_id' => $service->id]) }}" x-data="{ tooltip: false }">
+
+                                            <x-button type="submit" buttonType="danger-light" withIcon="true" class="sm:h-9 sm:px-2" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                                  </svg>
+                                            </x-button>
+
+                                            <div class="relative z-50">
+                                                <div class="absolute text-center -top-10 z-50 w-32 md:w-52 px-2 py-1 -mt-1 text-sm leading-tight transform transition duration-500 ease-in-out   -translate-x-3/4 -translate-y-full bg-gray-700 text-gray-100 border-gray-500 border-2 rounded shadow-sm"
+                                                x-show="tooltip">
+                                                  <span class="font-semibold">Mark Canceled</span>  <br /><span class="text-xs text-gray-500 pl-2">Service will be canceled.</span>
+                                                </div>
+                                            </div>
                                         </a>
 
                                     </div>
 
                                     @else
-                                    <x-button buttonType="light-success" withIcon="true" disabled="disabled" class="sm:h-9 sm:px-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                        </svg>
-                                    </x-button>
+                                        @if ($service->isCanceled())
+                                        <x-button type="submit" buttonType="danger-light" withIcon="true" class="sm:h-9 sm:px-2" disabled="disabled">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                            </svg>
+                                        </x-button>
+                                        @endif
+
+                                        @if ($service->isCompleted() || $service->isNotPending())
+                                        <x-button buttonType="light-success" withIcon="true" disabled="disabled" class="sm:h-9 sm:px-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                            </svg>
+                                        </x-button>
+                                        @endif
+
                                     @endif
                                 </div>
                             </div>

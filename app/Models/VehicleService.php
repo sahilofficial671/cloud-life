@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\Vehicle\HasCarbonDates;
 use App\Traits\Vehicle\Service\HasServiceStasuses;
 use App\Traits\Vehicle\Service\HasServiceTypes;
+use Illuminate\Database\Eloquent\Builder;
 
 class VehicleService extends Model
 {
@@ -24,5 +25,7 @@ class VehicleService extends Model
         'type_id',
         'scheduled_at',
         'serviced_at',
+        'completed_at',
+        'canceled_at'
     ];
 }
