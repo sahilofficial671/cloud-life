@@ -37,7 +37,7 @@
                             <div x-on:click="activeTab = 1" class="px-4 py-3 text-md font-semibold cursor-pointer hover:bg-indigo-50 -m-0.5" :class="{'text-indigo-700 border-b-2 border-indigo-700' : activeTab == 1}">Services</div>
                         </div>
                         <div class="right pr-4 flex items-center">
-                            <a href="{{ route('vehicles.services.create', [ 'vehicle_id' => $vehicle->id]) }}" class="py-2 pt-3">
+                            <a href="{{ route('vehicles.services.create', [ 'vehicle' => $vehicle->id]) }}" class="py-2 pt-3">
                                 <x-button type="submit" buttonType="secondary" withIcon="true" class="sm:px-1 sm:py-1 sm:h-7">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -105,7 +105,7 @@
                                     <div class="flex items-center space-x-2">
 
                                         @if ($service->isMonthly())
-                                        <a href="{{ route('vehicles.services.serviced', [ 'vehicle_id' => $vehicle->id, 'service_id' => $service->id]) }}" x-data="{ tooltip: false }">
+                                        <a href="{{ route('vehicles.services.serviced', [ 'vehicle' => $vehicle, 'service' => $service]) }}" x-data="{ tooltip: false }">
                                             <x-button type="submit" buttonType="light-success" withIcon="true" class="sm:h-9 sm:px-2" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
@@ -121,7 +121,7 @@
                                         </a>
                                         @endif
 
-                                        <a href="{{ route('vehicles.services.complete', [ 'vehicle_id' => $vehicle->id, 'service_id' => $service->id]) }}" x-data="{ tooltip: false }">
+                                        <a href="{{ route('vehicles.services.complete', [ 'vehicle' => $vehicle, 'service' => $service]) }}" x-data="{ tooltip: false }">
 
                                             <x-button type="submit" buttonType="secondary" withIcon="true" class="sm:h-9 sm:px-2" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -139,7 +139,7 @@
                                             </div>
                                         </a>
 
-                                        <a href="{{ route('vehicles.services.cancel', [ 'vehicle_id' => $vehicle->id, 'service_id' => $service->id]) }}" x-data="{ tooltip: false }">
+                                        <a href="{{ route('vehicles.services.cancel', [ 'vehicle' => $vehicle, 'service' => $service]) }}" x-data="{ tooltip: false }">
 
                                             <x-button type="submit" buttonType="danger-light" withIcon="true" class="sm:h-9 sm:px-2" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

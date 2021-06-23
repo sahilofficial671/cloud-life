@@ -64,10 +64,8 @@ class VehicleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $id)
+    public function show(Request $request, Vehicle $vehicle)
     {
-        $vehicle = $request->user()->vehicles()->findOrFail($id);
-
         // Get, first sort by scheduled at then sort by pending status
         $services = $vehicle->services()
                             ->orderBy('scheduled_at', 'desc')

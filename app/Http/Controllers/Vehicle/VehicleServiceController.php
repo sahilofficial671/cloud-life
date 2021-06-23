@@ -17,10 +17,10 @@ class VehicleServiceController extends Controller
      *
      * @return \Illuminate\Contracts\View\View
      */
-    public function create(Request $request, $vehicleId)
+    public function create(Request $request, Vehicle $vehicle)
     {
         return view('vehicle.service.create', [
-            'vehicle' =>  $request->user()->vehicles()->findOrFail($vehicleId),
+            'vehicle' =>  $vehicle,
             'types'   =>  VehicleService::getTypes(),
         ]);
     }
@@ -29,10 +29,10 @@ class VehicleServiceController extends Controller
      * Store a newly created vehicle service in database.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $vehicleId
-     * @return \Illuminate\Http\Response
+     * @param  App\Models\Vehicle  $vehicle
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request, $vehicleId)
+    public function store(Request $request, Vehicle $vehicle)
     {
         $validator = validator($request->all(), [
             'name'          => ['required', 'string'],
@@ -55,8 +55,6 @@ class VehicleServiceController extends Controller
                     ->withInput();
         }
 
-        $vehicle = $request->user()->vehicles()->findOrFail($vehicleId);
-
         $services = $vehicle->services();
 
         // If trying to create monthly service but active monthly service already exists
@@ -75,21 +73,18 @@ class VehicleServiceController extends Controller
 
         $services->create($validator->validated());
 
-        return redirect()->route('vehicles.show', $vehicleId)->with(['success' => 'Successfully Created.']);
+        return redirect()->route('vehicles.show', $vehicle)->with(['success' => 'Successfully Created.']);
     }
 
     /**
      * Mark vehicle service serviced.
      *
-     * @param  int  $vehicleId
-     * @param  int  $serviceId
-     * @return \Illuminate\Http\Response
+     * @param  App\Models\Vehicle  $vehicle
+     * @param  App\Models\VehicleService  $service
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function serviced($vehicleId, $serviceId)
+    public function serviced(Vehicle $vehicle, VehicleService $service)
     {
-        $vehicle =  auth()->user()->vehicles()->findOrFail($vehicleId);
-        $service =  $vehicle->services()->findOrFail($serviceId);
-
         $service->update([
             'serviced_at'  => now()
         ]);
@@ -103,7 +98,7 @@ class VehicleServiceController extends Controller
             $service->serviced_at = null;
             $service->save();
 
-            $message .= ' New service '. $service->name .' has been generated for - '.$service->scheduledAt()->toFormattedDateString();
+            $message .= ' New service <b>'. $service->name .'</b> has been generated for - '.$service->scheduledAt()->toFormattedDateString();
         }
 
         return back()->with(['success' => $message]);
@@ -112,15 +107,12 @@ class VehicleServiceController extends Controller
     /**
      * Mark service complete.
      *
-     * @param  int  $vehicleId
-     * @param  int  $serviceId
-     * @return \Illuminate\Http\Response
+     * @param  App\Models\Vehicle  $vehicle
+     * @param  App\Models\VehicleService  $service
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function complete($vehicleId, $serviceId)
+    public function complete(Vehicle $vehicle, VehicleService $service)
     {
-        $vehicle =  auth()->user()->vehicles()->findOrFail($vehicleId);
-        $service =  $vehicle->services()->findOrFail($serviceId);
-
         $service->update([
             'serviced_at'  => now(),
             'completed_at' => now()
@@ -132,15 +124,12 @@ class VehicleServiceController extends Controller
     /**
      * Mark service canceled.
      *
-     * @param  int  $vehicleId
-     * @param  int  $serviceId
+     * @param  App\Models\Vehicle  $vehicle
+     * @param  App\Models\VehicleService  $service
      * @return \Illuminate\Http\Response
      */
-    public function cancel($vehicleId, $serviceId)
+    public function cancel(Vehicle $vehicle, VehicleService $service)
     {
-        $vehicle =  auth()->user()->vehicles()->findOrFail($vehicleId);
-        $service =  $vehicle->services()->findOrFail($serviceId);
-
         $service->update([
             'canceled_at' => now()
         ]);
