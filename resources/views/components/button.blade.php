@@ -1,11 +1,15 @@
 @props([
     'buttonType' => 'primary',
     'withIcon'   => false,
+    'height'     => 'h-10',
     'disabled'   => false,
 ])
 
 @php
-    $class = 'inline-flex h-10 py-2 items-center border border-transparent rounded-md font-semibold text-xs uppercase tracking-widest focus:outline-none focus:ring disabled:opacity-25 transition ease-in-out duration-150 shadow-sm hover:shadow';
+    $class = 'inline-flex py-2 items-center border border-transparent rounded-md font-semibold text-xs uppercase tracking-widest focus:outline-none focus:ring disabled:opacity-25 transition ease-in-out duration-150 shadow-sm hover:shadow';
+
+
+    $class .= ' '.$height;
 
     $class .= $withIcon ? ' px-2.5' : ' px-4';
 
