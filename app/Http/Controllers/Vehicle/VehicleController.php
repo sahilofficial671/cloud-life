@@ -61,7 +61,8 @@ class VehicleController extends Controller
     /**
      * Display the specified vehicle.
      *
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $vehicle
+     * @param  Vehicle $vehicle
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request, Vehicle $vehicle)
@@ -85,7 +86,7 @@ class VehicleController extends Controller
      * Remove the specified vehicle from storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroyBulk(Request $request)
     {
@@ -100,5 +101,18 @@ class VehicleController extends Controller
         $request->user()->vehicles()->whereIn('id', $request->vehicles)->delete();
 
         return back()->with(['success' => "Successfully Deleted. Vehicle ID: ".implode(',', $request->vehicles)]);
+    }
+
+    /**
+     * Destroy the vehicle.
+     *
+     * @param  Vehicle $vehicle
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(Vehicle $vehicle)
+    {
+        $vehicle->delete();
+
+        return back()->with(['success' => "Successfully Deleted. Vehicle ID: ".$vehicle->id]);
     }
 }

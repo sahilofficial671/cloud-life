@@ -15,9 +15,19 @@
                     <div class="px-6 py-4">
                         <div class="flex justify-between items-start">
                             <div class="flex items-center">
-                                <div><img src="{{ asset('images/bike/bike-image.svg') }}" alt="Bike" class="inline-flex mr-3"></div>
+
+                                <div class="flex items-center justify-items-center bg-indigo-100 bg-opacity-25 p-1 rounded-full w-14 h-14 mr-2">
+                                    @if ($vehicle->category->isTwoWheeler())
+                                        <img src="{{ asset('images/bike/bike-image.svg') }}" alt="Bike" class="inline-flex mr-3">
+                                    @endif
+
+                                    @if ($vehicle->category->isFourWheeler())
+                                        <x-icons.car class="w-6 mx-auto"/>
+                                    @endif
+                                </div>
+
                                 <div class="details inline-flex flex-col items-start pt-1">
-                                    <div class="text-sm text-indigo-600 font-semibold">{{$vehicle->category->name }}</div>
+                                    <div class="text-xs text-indigo-600 font-semibold">{{$vehicle->category->name }}</div>
                                     <h4 class="text-lg font-semibold">{{ __($vehicle->model) }}</h4>
                                     <span class="bg-gray-100 px-2 py-1 text-xs rounded font-semibold">{{ $vehicle->rc }}</span>
                                 </div>
@@ -38,7 +48,7 @@
                         </div>
                         <div class="right pr-4 flex items-center">
                             <a href="{{ route('vehicles.services.create', [ 'vehicle' => $vehicle->id]) }}" class="py-2 pt-3">
-                                <x-button type="submit" buttonType="secondary" withIcon="true" class="sm:px-1 sm:py-1 sm:h-7">
+                                <x-button type="submit" buttonType="secondary" height="h-7" withIcon="true" class="sm:px-1 sm:py-1 sm:h-7">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                                     </svg>
@@ -106,8 +116,8 @@
 
                                         @if ($service->isMonthly())
                                         <a href="{{ route('vehicles.services.serviced', [ 'vehicle' => $vehicle, 'service' => $service]) }}" x-data="{ tooltip: false }">
-                                            <x-button type="submit" buttonType="light-success" withIcon="true" class="sm:h-9 sm:px-2" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <x-button height="h-8" type="submit" buttonType="light-success" withIcon="true" class="sm:h-9 sm:px-2" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                                 </svg>
                                             </x-button>
@@ -123,8 +133,8 @@
 
                                         <a href="{{ route('vehicles.services.complete', [ 'vehicle' => $vehicle, 'service' => $service]) }}" x-data="{ tooltip: false }">
 
-                                            <x-button type="submit" buttonType="secondary" withIcon="true" class="sm:h-9 sm:px-2" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <x-button height="h-8" type="submit" buttonType="secondary" withIcon="true" class="sm:h-9 sm:px-2" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                                                   </svg>
                                             </x-button>
@@ -141,8 +151,8 @@
 
                                         <a href="{{ route('vehicles.services.cancel', [ 'vehicle' => $vehicle, 'service' => $service]) }}" x-data="{ tooltip: false }">
 
-                                            <x-button type="submit" buttonType="danger-light" withIcon="true" class="sm:h-9 sm:px-2" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <x-button height="h-8" type="submit" buttonType="danger-light" withIcon="true" class="sm:h-9 sm:px-2" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                                                   </svg>
                                             </x-button>
@@ -159,16 +169,16 @@
 
                                     @else
                                         @if ($service->isCanceled())
-                                        <x-button type="submit" buttonType="danger-light" withIcon="true" class="sm:h-9 sm:px-2" disabled="disabled">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <x-button height="h-8" type="submit" buttonType="danger-light" withIcon="true" class="sm:h-9 sm:px-2" disabled="disabled">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                                             </svg>
                                         </x-button>
                                         @endif
 
                                         @if ($service->isCompleted() || $service->isNotPending())
-                                        <x-button buttonType="light-success" withIcon="true" disabled="disabled" class="sm:h-9 sm:px-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <x-button height="h-8" buttonType="light-success" withIcon="true" disabled="disabled" class="sm:h-9 sm:px-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                             </svg>
                                         </x-button>
