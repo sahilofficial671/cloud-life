@@ -18,6 +18,10 @@ module.exports = {
     variants: {
         extend: {
             opacity: ['disabled'],
+            ringWidth: ['hover'],
+            borderWidth: ['hover', 'focus'],
+            margin: ['group-hover'],
+            transitionDuration: ['hover'],
         },
     },
 
