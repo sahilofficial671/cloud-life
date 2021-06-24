@@ -34,13 +34,13 @@
                 @foreach ($vehicles as $vehicle)
                 <div class="pt-2 md:w-1/3 text-center">
                     <a href="{{ route('vehicles.show', $vehicle) }}">
-                        <x-card width="max-w-xs md:max-w-sm" class="mx-auto hover:bg-indigo-50 hover:bg-opacity-20 border-2 border-indigo-200 border-opacity-0 hover:border-2 hover:border-indigo-200 hover:ring-2 hover:ring-indigo-200 group">
+                        <x-card width="max-w-xs md:max-w-sm" class="ring-1 ring-indigo-50 hover:ring-2 hover:ring-indigo-50 ring-opacity-75 group transition-all duration-300 ease-in-out transform hover:-translate-y-2">
                             <x-slot name="body">
                                 <div class="px-6 py-4">
                                     <div class="flex justify-between items-start">
                                         <div class="left flex items-center">
 
-                                            <div class="flex items-center justify-items-center bg-indigo-100 bg-opacity-25 p-1 rounded-full w-16 h-16 mr-2 group-hover:bg-white group-hover:border-2 group-hover:border-indigo-200 border-2 border-indigo-100 ring-2 ring-indigo-50 ring-opacity-25 group-hover:ring-opacity-75 group-hover:ring-indigo-100">
+                                            <div class="flex items-center justify-items-center bg-indigo-100 bg-opacity-25 p-1 rounded-full w-16 h-16 mr-2 border-2 border-indigo-100 border-opacity-50">
                                                 @if ($vehicle->category->isTwoWheeler())
                                                     <img src="{{ asset('images/bike/bike-image.svg') }}" alt="Bike" class="inline-flex mr-3">
                                                 @endif
@@ -53,11 +53,11 @@
                                             <div class="details inline-flex flex-col items-start pt-1">
                                                 <div class="text-xs text-indigo-600 font-semibold">{{$vehicle->category->name }}</div>
                                                 <h4 class="text-xl font-semibold">{{ __($vehicle->model) }}</h4>
-                                                <span class="bg-gray-100 px-2 py-1 text-xs rounded font-semibold group-hover:bg-white border-2 border-gray-100 border-opacity-0 group-hover:border-opacity-100 group-hover:border-2 group-hover:border-gray-100">{{ $vehicle->rc }}</span>
+                                                <span class="bg-gray-100 px-2 py-1 text-xs rounded font-semibold">{{ $vehicle->rc }}</span>
                                             </div>
                                         </div>
                                         <div class="right flex flex-col justify-between">
-                                            <div class="bg-gray-100 px-2 py-1 text-xs rounded group-hover:bg-white border-2 border-gray-100 border-opacity-0 group-hover:border-opacity-100 group-hover:border-2 group-hover:border-gray-100">ID: {{ $vehicle->id }}</div>
+                                            <div class="bg-gray-100 px-2 py-1 text-xs rounded">ID: {{ $vehicle->id }}</div>
 
                                             <div class="text-center">
                                                 <form method="POST" action="{{route('vehicles.destroy', $vehicle)}}">
