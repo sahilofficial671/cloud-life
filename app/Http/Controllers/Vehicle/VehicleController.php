@@ -15,7 +15,7 @@ class VehicleController extends Controller
      * Display a listing of the vehicles.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\View\View
      */
     public function index(Request $request)
     {
@@ -25,7 +25,7 @@ class VehicleController extends Controller
     /**
      * Show the form for creating a new vehicles.
      *
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -36,7 +36,7 @@ class VehicleController extends Controller
      * Store a newly created vehicle in database.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -63,11 +63,10 @@ class VehicleController extends Controller
      *
      * @param  \Illuminate\Http\Request $vehicle
      * @param  Vehicle $vehicle
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function show(Request $request, Vehicle $vehicle)
     {
-        // Get, first sort by scheduled at then sort by pending status
         $services = $vehicle->services()
                             ->orderBy('scheduled_at', 'desc')
                             ->limit(10)
