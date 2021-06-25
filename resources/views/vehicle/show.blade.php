@@ -55,7 +55,7 @@
                 <x-slot name="tabs">
                     <div class="tabs flex border-b-2 border-indigo-300 items-center justify-between h-12">
                         <div class="left">
-                            <div x-on:click="activeTab = 1" class="px-4 py-3 text-md font-semibold cursor-pointer hover:bg-indigo-50 -m-0.5" :class="{'text-indigo-700 border-b-2 border-indigo-700' : activeTab == 1}">Services</div>
+                            <div x-on:click="activeTab = 1" class="px-4 py-3 text-md font-semibold cursor-pointer -m-0.5" :class="{'text-indigo-700 border-b-2 border-indigo-700' : activeTab == 1, 'hover:bg-indigo-50' : activeTab != 1}">Services</div>
                         </div>
                         <div class="right pr-4 flex items-center">
                             <a href="{{ route('vehicles.services.create', [ 'vehicle' => $vehicle->id]) }}" class="py-2 pt-3">

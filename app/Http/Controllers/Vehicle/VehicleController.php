@@ -19,7 +19,7 @@ class VehicleController extends Controller
      */
     public function index(Request $request)
     {
-        return view('vehicle.index', ['vehicles' => $request->user()->vehicles()->paginate(15)]);
+        return view('vehicle.index', ['vehicles' => $request->user()->vehicles]);
     }
 
     /**
@@ -69,7 +69,7 @@ class VehicleController extends Controller
     {
         $services = $vehicle->services()
                             ->orderBy('scheduled_at', 'desc')
-                            ->limit(10)
+                            ->limit(7)
                             ->get()
                             ->sortByDesc(function($service) {
                                     return $service->isOnlyPending();

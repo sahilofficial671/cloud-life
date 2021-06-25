@@ -32,7 +32,7 @@
 
             <div class="sm:flex sm:flex-wrap">
                 @foreach ($vehicles as $vehicle)
-                <div class="pt-2 md:w-1/3 text-center">
+                <div class="md:w-1/3 text-center">
                     <a href="{{ route('vehicles.show', $vehicle) }}">
                         <x-card width="max-w-xs md:max-w-sm" class="ring-1 ring-indigo-50 hover:ring-2 hover:ring-indigo-50 ring-opacity-75 group transition-all duration-300 ease-in-out transform hover:-translate-y-2">
                             <x-slot name="body">
