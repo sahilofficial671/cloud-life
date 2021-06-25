@@ -43,7 +43,7 @@
                         </svg>
                     </span>
                 </div>
-                <div class="text-md font-semibold">{{ session($type) }}</div>
+                <div class="text-sm md:text-md font-semibold leading-normal">{!! session()->get($type) !!}</div>
             </div>
 
             <button x-on:click="isHidden = ! isHidden" type="button" class="inline-flex items-center justify-center p-2 lg:p-0 rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:text-gray-500">

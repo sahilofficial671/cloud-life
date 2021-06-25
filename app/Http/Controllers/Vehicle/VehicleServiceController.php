@@ -98,7 +98,7 @@ class VehicleServiceController extends Controller
             $service->serviced_at = null;
             $service->save();
 
-            $message .= ' New service <b>'. $service->name .'</b> has been generated for - '.$service->scheduledAt()->toFormattedDateString();
+            $message .= sprintf('<br />New <span class="font-bold">%s</span> has been generated for - %s', $service->name, $service->scheduledAt()->toFormattedDateString());
         }
 
         return back()->with(['success' => $message]);

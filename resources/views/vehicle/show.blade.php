@@ -7,8 +7,7 @@
         <div class="max-w-7xl px-3 mx-auto sm:px-6 lg:px-8">
             <x-back href="{{ route('vehicles.index') }}" />
             <div class="sm:max-w-lg mx-auto">
-                @alertSuccess
-                @alertError
+                <x-alert />
             </div>
 
             <x-card width="sm:max-w-lg" class="mx-auto">

@@ -21,10 +21,10 @@
                                         <div class="flex justify-between items-center">
                                             <div class="left w-3/4 px-4 sm:px-6 py-4">
                                                 <h2 class="text-lg text-gray-900 font-semibold title-font mb-1">Vehicles</h2>
-                                                <p class="leading-tight text-gray-500 text-sm sm:text-base">Sleek vehicle management out-of-the-box.</p>
+                                                <p class="leading-tight text-gray-500 text-sm sm:text-base">Sleek vehicles management out-of-the-box.</p>
                                             </div>
                                             <div class="right w-1/4 text-center px-4 sm:px-6">
-                                                <div class="text-9xl md:text-9xl font-semibold md:font-bold text-indigo-200 -mr-10 sm:-mr-14 group-hover:-mr-10 transition-all duration-300 ease-in-out">
+                                                <div class="text-8xl md:text-9xl font-semibold md:font-bold text-indigo-100 bg-opacity-70 -ml-4 transition-all duration-300 ease-in-out">
                                                     {{ $vehicles }}
                                                 </div>
                                             </div>

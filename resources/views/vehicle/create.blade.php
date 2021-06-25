@@ -6,8 +6,7 @@
     <div class="py-10" x-data="{ open: false }">
         <div class="max-w-7xl px-3 mx-auto sm:px-6 lg:px-8">
             <x-back href="{{ route('vehicles.index') }}" />
-            @alertSuccess
-            @alertError
+            <x-alert />
             <div class="flex flex-col items-center">
                 <x-card>
                     <x-slot name="header">

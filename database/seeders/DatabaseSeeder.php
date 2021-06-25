@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             VehicleCategorySeeder::class,
         ]);
 
-        \App\Models\Vehicle::factory(10)->create();
+        \App\Models\Vehicle::factory(4)->create();
 
         $this->call([
             VehicleServiceSeeder::class,
