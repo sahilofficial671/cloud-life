@@ -69,11 +69,7 @@ class VehicleController extends Controller
     {
         $services = $vehicle->services()
                             ->orderBy('scheduled_at', 'desc')
-                            ->limit(7)
-                            ->get()
-                            ->sortByDesc(function($service) {
-                                    return $service->isOnlyPending();
-                            });
+                            ->paginate(7);
 
         return view('vehicle.show', [
             'vehicle'  => $vehicle,

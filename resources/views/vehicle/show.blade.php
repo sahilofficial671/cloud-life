@@ -199,7 +199,9 @@
                                 </div>
                             </div>
                             @endforeach
-
+                            <div class="md:px-8 my-3 px-3">
+                                {{ $services->links() }}
+                            </div>
                         </div>
 
                     </div>
