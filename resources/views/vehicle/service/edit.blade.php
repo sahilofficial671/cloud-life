@@ -10,7 +10,7 @@
                 <x-alert container="w-full sm:max-w-md"/>
                 <x-card>
                     <x-slot name="header">
-                        {{ __('Create Vehicle Service') }}
+                        {{ __('Update Vehicle Service') }}
                     </x-slot>
                     <x-slot name="body">
                         <form method="POST" action="{{ route('vehicles.services.update', [ 'vehicle' => $vehicle, 'service' => $service]) }}" class="px-6 py-4">
