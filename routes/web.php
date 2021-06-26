@@ -34,6 +34,8 @@ Route::group(["middleware" => ['auth', 'verified']], function(){
         Route::get('/create', [VehicleServiceController::class, 'create'])->name('.create');
 
         Route::prefix('/{service}')->group(function(){
+            Route::get('/edit', [VehicleServiceController::class, 'edit'])->name('.edit');
+            Route::post('/update', [VehicleServiceController::class, 'update'])->name('.update');
             Route::get('/serviced', [VehicleServiceController::class, 'serviced'])->name('.serviced');
             Route::get('/complete', [VehicleServiceController::class, 'complete'])->name('.complete');
             Route::get('/cancel', [VehicleServiceController::class, 'cancel'])->name('.cancel');

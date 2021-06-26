@@ -13,7 +13,7 @@ trait HasCarbonDates{
     */
     public function servicedAt()
     {
-        return new Carbon($this->serviced_at);
+        return (new Carbon($this->serviced_at))->startOfDay();
     }
 
     /**
@@ -23,7 +23,7 @@ trait HasCarbonDates{
     */
     public function scheduledAt()
     {
-        return new Carbon($this->scheduled_at);
+        return (new Carbon($this->scheduled_at))->startOfDay();
     }
 
     /**
@@ -33,7 +33,7 @@ trait HasCarbonDates{
     */
     public function canceledAt()
     {
-        return new Carbon($this->canceled_at);
+        return (new Carbon($this->canceled_at))->startOfDay();
     }
 
     /**
@@ -43,7 +43,7 @@ trait HasCarbonDates{
     */
     public function createdAt()
     {
-        return new Carbon($this->created_at);
+        return (new Carbon($this->created_at))->startOfDay();
     }
 
     /**
@@ -53,6 +53,6 @@ trait HasCarbonDates{
     */
     public function updatedAt()
     {
-        return new Carbon($this->updated_at);
+        return (new Carbon($this->updated_at))->startOfDay();
     }
 }

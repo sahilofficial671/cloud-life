@@ -9,13 +9,14 @@ use App\Models\Vehicle;
 use App\Models\VehicleService;
 use Illuminate\Validation\Rule;
 use Carbon\Carbon;
+use Illuminate\Validation\Validator;
 
 class VehicleServiceController extends Controller
 {
     /**
      * Show the form for creating a new vehicle service.
      *
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\View\View
      */
     public function create(Request $request, Vehicle $vehicle)
     {
@@ -34,15 +35,7 @@ class VehicleServiceController extends Controller
      */
     public function store(Request $request, Vehicle $vehicle)
     {
-        $validator = validator($request->all(), [
-            'name'          => ['required', 'string'],
-            'description'   => ['required', 'string'],
-            'scheduled_at'  => ['required', 'date_format:Y-m-d'],
-            'serviced_at'   => ['date_format:Y-m-d'],
-            'type_id'       => ['required', Rule::in(VehicleService::getTypes()->keys())],
-        ], [
-            'type_id.in'    => 'Please select valid service type.',
-        ]);
+        $validator = $this->validateModel($request->all());
 
         if($validator->fails()){
             return back()->with(['error' => $validator->errors()->first()]);
@@ -74,6 +67,61 @@ class VehicleServiceController extends Controller
         $services->create($validator->validated());
 
         return redirect()->route('vehicles.show', $vehicle)->with(['success' => 'Successfully Created.']);
+    }
+
+    /**
+     * Edit vehicle service view.
+     *
+     * @param  App\Models\Vehicle  $vehicle
+     * @param  App\Models\VehicleService  $service
+     * @return \Illuminate\View\View
+     */
+    public function edit(Vehicle $vehicle, VehicleService $service)
+    {
+        return view('vehicle.service.edit', [
+            'vehicle' =>  $vehicle,
+            'service' =>  $service,
+            'types'   =>  VehicleService::getTypes(),
+        ]);
+    }
+
+    /**
+     * Update vehicle service.
+     *
+     * @param  App\Models\Vehicle  $vehicle
+     * @param  App\Models\VehicleService  $service
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(Request $request, Vehicle $vehicle, VehicleService $service)
+    {
+        $validator = $this->validateModel($request->all());
+
+        if($validator->fails()){
+            return back()->with(['error' => $validator->errors()->first()]);
+        }
+
+        $service->update($validator->validated());
+
+        return redirect()->route('vehicles.show', $vehicle)->with(['success' => 'Successfully Updated.']);
+    }
+
+    /**
+     * Validate  vehicle service model.
+     *
+     * @param  $inputs
+     * @return Illuminate\Validation\Validator
+     */
+    public function validateModel($inputs) : \Illuminate\Validation\Validator
+    {
+        return validator($inputs, [
+            'name'          => ['required', 'string'],
+            'description'   => ['required', 'string'],
+            'scheduled_at'  => ['required', 'date_format:Y-m-d'],
+            'serviced_at'   => ['date_format:Y-m-d'],
+            'type_id'       => ['required', Rule::in(VehicleService::getTypes()->keys())],
+        ], [
+            'type_id.in'    => 'Please select valid service type.',
+        ]);
     }
 
     /**

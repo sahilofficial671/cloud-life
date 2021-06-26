@@ -45,7 +45,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{!! $class['icon'] !!}" />
                     </svg>
                     </div>
-                    <div class="mt-3 sm:mt-0 sm:ml-4 sm:text-left">
+                    <div class="w-full mt-3 sm:mt-0 sm:ml-4 sm:text-left">
                         @isset($header)
                             {!! $header !!}
                         @endisset

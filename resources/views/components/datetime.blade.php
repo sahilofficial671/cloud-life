@@ -3,7 +3,8 @@
     'type'        => 'text',
     'name'        => 'datetime',
     'isHidden'    => false,
-    'placeholder' => 'Select date'
+    'placeholder' => 'Select date',
+    'value'       => '',
 ])
 
 @php
@@ -15,7 +16,7 @@
 @endphp
 
 <div class="relative">
-    <input type="hidden" name="{{ $name }}" x-ref="date" class="datetime">
+    <input type="hidden" name="{{ $name }}" x-ref="date" value="{!! $value !!}" class="datetime">
     <input
         {!! $attributes->merge([
             'type'            => $type,
@@ -23,7 +24,8 @@
             'x-model'         => "datepickerValue",
             '@click'          => "showDatepicker = !showDatepicker",
             '@keydown.escape' => "showDatepicker = false",
-            'placeholder'     => $placeholder
+            'placeholder'     => $placeholder,
+            'x-ref'           => 'datetime',
         ]) !!}
         readonly>
 
@@ -36,7 +38,7 @@
 
     <!-- Calendar -->
     <div
-        class="bg-white mt-12 rounded-lg shadow p-4 absolute top-0 left-0 w-64 md:w-80 {!! $isHidden ? 'hidden' : ''!!}"
+        class="z-10 bg-white mt-12 rounded-lg shadow p-4 absolute top-0 left-0 w-64 md:w-80 {!! $isHidden ? 'hidden' : ''!!}"
         x-show.transition="showDatepicker"
         @click.away="showDatepicker = false">
 

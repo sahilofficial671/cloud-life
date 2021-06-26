@@ -200,7 +200,20 @@
 
                                         @endif
                                     @endif
+                                    <a href="{{ route('vehicles.services.edit', [ 'vehicle' => $vehicle, 'service' => $service]) }}" x-data="{ tooltip: false }" class="relative inline-block">
+                                        <x-button height="h-8" buttonType="warning-light" withIcon="true" class="sm:h-9 sm:px-2" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 s:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                              </svg>
+                                        </x-button>
 
+                                        <div class="z-50">
+                                            <div class="absolute text-center -top-10 -left-2 z-50 w-12 md:w-12 px-2 py-1 text-sm leading-tight transform transition duration-500 ease-in-out bg-gray-700 text-gray-100 border-gray-500 border-2 rounded shadow-sm"
+                                            x-show="tooltip">
+                                                <span class="font-semibold">Edit</span>
+                                            </div>
+                                        </div>
+                                    </a>
                                     <div x-on:click="isDescriptionActive = ! isDescriptionActive" class="relative inline-block">
                                         <a x-data="{ tooltip: false }">
                                             <x-button height="h-8" buttonType="light" withIcon="true" class="sm:h-9 sm:px-2" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
@@ -235,14 +248,19 @@
                                 @endphp
                                 <x-modal x-show="isDescriptionActive" toggle="isDescriptionActive" type="{{$type}}">
                                     <x-slot name="header">
-                                        <div id="modal-title">
-                                            <h3 class="text-lg leading-6 font-medium text-gray-900">
-                                                {!! $service->name !!}
+                                        <div class="flex justify-between">
+                                            <div id="modal-title">
+                                                <h3 class="text-lg leading-6 font-medium text-gray-900">
+                                                    {!! $service->name !!}
 
-                                                <x-pill type="{!! $service->statusType() !!}" value="{!! $service->statusText() !!}" />
-                                            </h3>
+                                                    <x-pill type="{!! $service->statusType() !!}" value="{!! $service->statusText() !!}" />
+                                                </h3>
+                                            </div>
+
+                                            <div class="font-semibold bg-gray-100 px-2 py-1 text-xs rounded border-2 border-gray-100 border-opacity-0">
+                                                ID: {{ $service->id }}
+                                            </div>
                                         </div>
-
                                     </x-slot>
                                     <x-slot name="body">
                                         <div class="mt-2 text-sm text-gray-500 space-y-2">
@@ -262,17 +280,26 @@
 
                                             <div class="mr-1">
                                                 <div class="inline-flex">
-                                                    <p class="mr-2 text-gray-600 font-semibold">Serviced On:</p>
-                                                    @if ($service->isNotPending())
+                                                    <p class="mr-2 text-gray-600 font-semibold">
+                                                        {{ ! $service->isCanceled() ? 'Serviced On: ' : 'Canceled On: '}}
+                                                    </p>
                                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-{{$color}}-500 text-opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                                         </svg>
-                                                    @endif
-                                                    <span class="text-xs font-semibold sm:text-sm">
-                                                        {{ $service->isNotPending() ? $service->scheduledAt()->toFormattedDateString() : 'NA'}}
-                                                    </span>
+
+                                                        @if (! $service->isCanceled())
+                                                        <span class="text-xs font-semibold sm:text-sm">
+                                                            {{ $service->isNotPending() ? $service->scheduledAt()->toFormattedDateString() : 'NA'}}
+                                                        </span>
+
+                                                        @else
+                                                        <span class="text-xs font-semibold sm:text-sm">
+                                                            {{ $service->canceledAt()->toFormattedDateString()}}
+                                                        </span>
+                                                        @endif
                                                 </div>
                                             </div>
+
 
                                             <div class="mr-1">
                                                 <div class="inline-flex">
