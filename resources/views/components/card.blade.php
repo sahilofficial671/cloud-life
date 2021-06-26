@@ -1,7 +1,7 @@
 @props(['width' => 'sm:max-w-md'])
 
 @php
-    $class = 'w-full mt-2 sm:mt-4 md:mt-6 bg-white shadow-md overflow-hidden rounded-lg '.$width;
+    $class = 'w-full bg-white shadow-md overflow-hidden rounded-lg '.$width;
 @endphp
 <div {{$attributes->merge(['class' => $class])}}>
 
