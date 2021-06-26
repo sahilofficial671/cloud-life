@@ -20,6 +20,8 @@ class VehicleServiceController extends Controller
      */
     public function create(Request $request, Vehicle $vehicle)
     {
+        $this->authorize('view', $vehicle);
+
         return view('vehicle.service.create', [
             'vehicle' =>  $vehicle,
             'types'   =>  VehicleService::getTypes(),
@@ -35,6 +37,8 @@ class VehicleServiceController extends Controller
      */
     public function store(Request $request, Vehicle $vehicle)
     {
+        $this->authorize('update', $vehicle);
+
         $validator = $this->validateModel($request->all());
 
         if($validator->fails()){
@@ -78,6 +82,8 @@ class VehicleServiceController extends Controller
      */
     public function edit(Vehicle $vehicle, VehicleService $service)
     {
+        $this->authorize('update', $service);
+
         return view('vehicle.service.edit', [
             'vehicle' =>  $vehicle,
             'service' =>  $service,
@@ -94,6 +100,8 @@ class VehicleServiceController extends Controller
      */
     public function update(Request $request, Vehicle $vehicle, VehicleService $service)
     {
+        $this->authorize('update', $service);
+
         $validator = $this->validateModel($request->all());
 
         if($validator->fails()){
@@ -133,6 +141,8 @@ class VehicleServiceController extends Controller
      */
     public function serviced(Vehicle $vehicle, VehicleService $service)
     {
+        $this->authorize('update', $service);
+
         $service->update([
             'serviced_at'  => now()
         ]);
@@ -161,6 +171,8 @@ class VehicleServiceController extends Controller
      */
     public function complete(Vehicle $vehicle, VehicleService $service)
     {
+        $this->authorize('update', $service);
+
         $service->update([
             'serviced_at'  => now(),
             'completed_at' => now()
@@ -178,10 +190,28 @@ class VehicleServiceController extends Controller
      */
     public function cancel(Vehicle $vehicle, VehicleService $service)
     {
+        $this->authorize('update', $service);
+
         $service->update([
             'canceled_at' => now()
         ]);
 
         return back()->with(['success' => $service->name.' has been canceled.']);
+    }
+
+    /**
+     * Destroy vehicle service.
+     *
+     * @param  App\Models\Vehicle  $vehicle
+     * @param  App\Models\VehicleService  $service
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(Vehicle $vehicle, VehicleService $service)
+    {
+        $this->authorize('delete', $service);
+
+        $service->delete();
+
+        return back()->with(['success' => "Successfully Deleted. Vehicle Service ID: ".$vehicle->id]);
     }
 }

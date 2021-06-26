@@ -222,7 +222,7 @@
                                             </x-button>
 
                                             <div class="z-50">
-                                                <div class="absolute text-center -top-10 -left-2 z-50 w-14 md:w-14 px-2 py-1 text-sm leading-tight transform transition duration-500 ease-in-out bg-gray-700 text-gray-100 border-gray-500 border-2 rounded shadow-sm"
+                                                <div class="absolute text-center -top-10 -left-3 z-50 w-14 md:w-16 px-2 py-1 text-sm leading-tight transform transition duration-500 ease-in-out bg-gray-700 text-gray-100 border-gray-500 border-2 rounded shadow-sm"
                                                 x-show="tooltip">
                                                     <span class="font-semibold">View</span>
                                                 </div>
@@ -230,6 +230,26 @@
                                         </a>
                                     </div>
 
+                                    <a x-data="{ tooltip: false }" class="relative inline-block">
+                                        <form method="POST" action="{{route('vehicles.services.destroy', [ 'vehicle' => $vehicle, 'service' => $service])}}">
+                                            @csrf
+                                            <input type="hidden" name="_method" value="delete" />
+                                            <x-button height="h-8 sm:h-9" buttonType="danger-light" padding="px-1 sm:px-2.5" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false"  onclick="event.preventDefault();
+                                            this.closest('form').submit();">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 s:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                            </x-button>
+                                        </form>
+
+
+                                        <div class="z-50">
+                                            <div class="absolute text-center -top-10 -left-3 z-50 w-14 md:w-16 px-2 py-1 text-sm leading-tight transform transition duration-500 ease-in-out bg-gray-700 text-gray-100 border-gray-500 border-2 rounded shadow-sm"
+                                            x-show="tooltip">
+                                                <span class="font-semibold">Delete</span>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
                                 @php
                                     $type = 'info';

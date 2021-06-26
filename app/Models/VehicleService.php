@@ -10,6 +10,7 @@ use App\Traits\Vehicle\HasCarbonDates;
 use App\Traits\Vehicle\Service\HasServiceStasuses;
 use App\Traits\Vehicle\Service\HasServiceTypes;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class VehicleService extends Model
 {
@@ -28,4 +29,14 @@ class VehicleService extends Model
         'completed_at',
         'canceled_at'
     ];
+
+    /**
+     * Get the vehicle that owns the VehicleService
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function vehicle(): BelongsTo
+    {
+        return $this->belongsTo(Vehicle::class);
+    }
 }

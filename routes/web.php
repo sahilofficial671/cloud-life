@@ -26,6 +26,7 @@ Route::group(["middleware" => ['auth', 'verified']], function(){
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('vehicles', VehicleController::class);
+
     Route::post('vehicles/destroy/bulk', [VehicleController::class, 'destroyBulk'])->name('vehicles.destroy.bulk');
 
     // Vehicle Services
@@ -39,6 +40,7 @@ Route::group(["middleware" => ['auth', 'verified']], function(){
             Route::get('/serviced', [VehicleServiceController::class, 'serviced'])->name('.serviced');
             Route::get('/complete', [VehicleServiceController::class, 'complete'])->name('.complete');
             Route::get('/cancel', [VehicleServiceController::class, 'cancel'])->name('.cancel');
+            Route::delete('/destroy', [VehicleServiceController::class, 'destroy'])->name('.destroy');
         });
     });
 });

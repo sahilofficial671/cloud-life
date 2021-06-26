@@ -61,12 +61,14 @@ class VehicleController extends Controller
     /**
      * Display the specified vehicle.
      *
-     * @param  \Illuminate\Http\Request $vehicle
+     * @param  \Illuminate\Http\Request $request
      * @param  Vehicle $vehicle
      * @return \Illuminate\View\View
      */
     public function show(Request $request, Vehicle $vehicle)
     {
+        $this->authorize('view', $vehicle);
+
         $services = $vehicle->services()
                             ->orderBy('scheduled_at', 'desc')
                             ->paginate(7);
@@ -78,27 +80,6 @@ class VehicleController extends Controller
     }
 
     /**
-     * Remove the specified vehicle from storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function destroyBulk(Request $request)
-    {
-        $validator = validator($request->all(), [
-            'vehicles' => ['required', 'array', 'exists:vehicles,id'],
-        ]);
-
-        if($validator->fails()){
-            return back()->with(['error' => $validator->errors()->first()]);
-        }
-
-        $request->user()->vehicles()->whereIn('id', $request->vehicles)->delete();
-
-        return back()->with(['success' => "Successfully Deleted. Vehicle ID: ".implode(',', $request->vehicles)]);
-    }
-
-    /**
      * Destroy the vehicle.
      *
      * @param  Vehicle $vehicle
@@ -106,6 +87,8 @@ class VehicleController extends Controller
      */
     public function destroy(Vehicle $vehicle)
     {
+        $this->authorize('delete', $vehicle);
+
         $vehicle->delete();
 
         return back()->with(['success' => "Successfully Deleted. Vehicle ID: ".$vehicle->id]);
