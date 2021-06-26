@@ -25,4 +25,34 @@ trait HasCarbonDates{
     {
         return new Carbon($this->scheduled_at);
     }
+
+    /**
+     * Get canceled at date carbon instance
+     *
+     * @return Carbon\Carbon
+    */
+    public function canceledAt()
+    {
+        return new Carbon($this->canceled_at);
+    }
+
+    /**
+     * Get created at date carbon instance
+     *
+     * @return Carbon\Carbon
+    */
+    public function createdAt()
+    {
+        return new Carbon($this->created_at);
+    }
+
+    /**
+     * Get updated at date carbon instance
+     *
+     * @return Carbon\Carbon
+    */
+    public function updatedAt()
+    {
+        return new Carbon($this->updated_at);
+    }
 }

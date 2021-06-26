@@ -13,7 +13,9 @@ trait HasServiceStasuses{
     */
     public function isPending()
     {
-        return is_null($this->serviced_at);
+        return is_null($this->serviced_at)
+            && is_null($this->completed_at)
+            && is_null($this->canceled_at);
     }
 
     /**
@@ -24,18 +26,6 @@ trait HasServiceStasuses{
     public function isNotPending()
     {
         return ! is_null($this->serviced_at);
-    }
-
-    /**
-     * If service is pending
-     *
-     * @return boolean
-    */
-    public function isOnlyPending()
-    {
-        return is_null($this->serviced_at)
-                && is_null($this->completed_at)
-                && is_null($this->canceled_at);
     }
 
     /**
@@ -56,5 +46,45 @@ trait HasServiceStasuses{
     public function isCompleted()
     {
         return isset($this->completed_at);
+    }
+
+    /**
+     * Get service status type
+     *
+     * @return string
+    */
+    public function statusType()
+    {
+        $label = '';
+
+        if($this->isPending()){
+            $label = 'info';
+        }else if($this->isCanceled()){
+            $label = 'danger';
+        }else if($this->isNotPending() || $this->isCompleted()){
+            $label = 'success';
+        }
+
+        return $label;
+    }
+
+    /**
+     * Get service status text
+     *
+     * @return string
+    */
+    public function statusText()
+    {
+        $text = '';
+
+        if($this->isPending()){
+            $text = 'Pending';
+        }else if($this->isCanceled()){
+            $text = 'Canceled';
+        }else if($this->isNotPending() || $this->isCompleted()){
+            $text = 'Completed';
+        }
+
+        return $text;
     }
 }

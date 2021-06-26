@@ -38,7 +38,7 @@
                                     <form method="POST" action="{{route('vehicles.destroy', $vehicle)}}">
                                         @csrf
                                         <input type="hidden" name="_method" value="delete" />
-                                        <x-button buttonType="danger-light" height="h-7" type="submit" withIcon="true" x-bind:disabled="items.length == 0"  class="mt-5">
+                                        <x-button buttonType="danger-light" height="h-7" type="submit" withIcon="true"  class="mt-5">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                               </svg>
@@ -79,25 +79,30 @@
                                 <div class="text-sm px-2 py-4 text-gray-700 text-center">No services yet.</div>
                             @endif
 
-                            @foreach ($services as $service)
                             @php
-
-                                $color = $service->isOnlyPending() ? 'indigo' : 'green';
-                                $textOpacity = $service->isOnlyPending() ? '100' : '50';
+                                // Sort paginated items.
+                                $items = collect($services->items())->sortByDesc(function($service){
+                                    return $service->isPending() && ! $service->isCanceled() && ! $service->isCompleted();
+                                });
+                            @endphp
+                            @foreach ($items as $service)
+                            @php
+                                $color = $service->isPending() ? 'indigo' : 'green';
+                                $textOpacity = $service->isPending() ? '100' : '50';
 
                                 if($service->isCanceled()){
                                     $color = 'red';
                                 }
                             @endphp
-                            <div class="flex justify-between items-start md:my-8 md:px-8 my-3 px-3">
-                                <div class="flex items-start">
-                                    <div class="relative bg-{{$color}}-50 bg-opacity-50 ring-1 ring-opacity-25 border-2 border-{{$color}}-100 border-opacity-75 ring-{{$color}}-50 w-11 h-11 md:w-14 md:h-14 mx-auto mr-3 flex justify-items-center items-center rounded-full">
+                            <div class="flex justify-between items-start py-2 md:py-4 px-3 md:px-6 my-2 border-b-2 border-gray-100" x-data="{ isDescriptionActive: false }">
+                                <div class="w-1/2 flex items-start">
+                                    <div class="relative bg-{{$color}}-50 bg-opacity-50 ring-1 ring-opacity-25 border-2 border-{{$color}}-100 border-opacity-75 ring-{{$color}}-50 w-11 h-11 md:w-14 md:h-14 mr-3 flex justify-items-center items-center rounded-full">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-5 text-opacity-{{$textOpacity}} sm:w-6 sm:h-6 mx-auto text-{{$color}}-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                         </svg>
 
-                                        @if ($service->isOnlyPending())
+                                        @if ($service->isPending())
                                         <svg xmlns="http://www.w3.org/2000/svg" class="absolute -top-1 -right-1 h-5 w-5 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
                                             <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
                                         </svg>
@@ -107,7 +112,7 @@
                                     <div class="details inline-flex flex-col items-start pt-0.5 sm:pt-2">
                                         <div class="text-md text-{{$color}}-600 text-opacity-{{$textOpacity}} font-semibold">{{$service->name }}</div>
                                         <div class="flex items-center mt-0.5 sm:mt-1">
-                                            <div class="icon inline-flex mr-1">
+                                            <div class="inline-flex mr-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 -mt-0.5 text-{{$color}}-500 text-opacity-{{$textOpacity}}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                                 </svg>
@@ -121,37 +126,34 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="pt-2">
-                                    @if ($service->isOnlyPending())
-                                    <div class="flex items-center space-x-2">
-
+                                <div class="w-1/2 text-right space-x-1.5 space-y-1.5 sm:space-y-2">
+                                    @if ($service->isPending())
                                         @if ($service->isMonthly())
-                                        <a href="{{ route('vehicles.services.serviced', [ 'vehicle' => $vehicle, 'service' => $service]) }}" x-data="{ tooltip: false }">
-                                            <x-button height="h-8" type="submit" buttonType="light-success" withIcon="true" class="sm:h-9 sm:px-2" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
+                                            <a href="{{ route('vehicles.services.serviced', [ 'vehicle' => $vehicle, 'service' => $service]) }}" x-data="{ tooltip: false }" class="relative inline-block">
+                                                <x-button height="h-8" buttonType="primary-light" withIcon="true" class="sm:h-9 sm:px-2" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                </x-button>
+
+                                                <div class="">
+                                                    <div class="absolute text-center -top-14 left-2 z-50 w-32 md:w-52 px-2 py-1 text-sm leading-tight transform transition duration-500 ease-in-out  -translate-x-1/2 bg-gray-700 text-gray-100 border-gray-500 border-2 rounded shadow-sm"
+                                                    x-show="tooltip">
+                                                        <span class="font-semibold">Mark Serviced</span> <br /><span class="text-xs text-gray-500 pl-2">This will also create next service.</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        @endif
+
+                                        <a href="{{ route('vehicles.services.complete', [ 'vehicle' => $vehicle, 'service' => $service]) }}" x-data="{ tooltip: false }" class="relative inline-block">
+                                            <x-button height="h-8" buttonType="secondary" withIcon="true" class="sm:h-9 sm:px-2" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                                                 </svg>
                                             </x-button>
 
-                                            <div class="relative">
-                                                <div class="absolute text-center -top-10 z-50 w-32 md:w-52 px-2 py-1 -mt-1 text-sm leading-tight transform transition duration-500 ease-in-out   -translate-x-1/2 -translate-y-full bg-gray-700 text-gray-100 border-gray-500 border-2 rounded shadow-sm"
-                                                x-show="tooltip">
-                                                <span class="font-semibold">Mark Serviced</span> <br /><span class="text-xs text-gray-500 pl-2">This will also create next service.</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        @endif
-
-                                        <a href="{{ route('vehicles.services.complete', [ 'vehicle' => $vehicle, 'service' => $service]) }}" x-data="{ tooltip: false }">
-
-                                            <x-button height="h-8" type="submit" buttonType="secondary" withIcon="true" class="sm:h-9 sm:px-2" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-                                                  </svg>
-                                            </x-button>
-
-                                            <div class="relative z-50">
-                                                <div class="absolute text-center -top-10 z-50 w-32 md:w-52 px-2 py-1 -mt-1 text-sm leading-tight transform transition duration-500 ease-in-out   -translate-x-1/2 -translate-y-full bg-gray-700 text-gray-100 border-gray-500 border-2 rounded shadow-sm"
+                                            <div class="z-50">
+                                                <div class="absolute text-center -top-14 left-2 z-50 w-32 md:w-52 px-2 py-1 text-sm leading-tight transform transition duration-500 ease-in-out   -translate-x-1/2 bg-gray-700 text-gray-100 border-gray-500 border-2 rounded shadow-sm"
                                                 x-show="tooltip">
                                                 <span class="font-semibold">Mark Completed</span>
                                                 <br />
@@ -160,47 +162,161 @@
                                             </div>
                                         </a>
 
-                                        <a href="{{ route('vehicles.services.cancel', [ 'vehicle' => $vehicle, 'service' => $service]) }}" x-data="{ tooltip: false }">
+                                        <a href="{{ route('vehicles.services.cancel', [ 'vehicle' => $vehicle, 'service' => $service]) }}" x-data="{ tooltip: false }" class="relative inline-block">
 
-                                            <x-button height="h-8" type="submit" buttonType="danger-light" withIcon="true" class="sm:h-9 sm:px-2" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
+                                            <x-button height="h-8" buttonType="danger-light" withIcon="true" class="sm:h-9 sm:px-2" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                                  </svg>
+                                                </svg>
                                             </x-button>
 
-                                            <div class="relative z-50">
-                                                <div class="absolute text-center -top-10 z-50 w-32 md:w-52 px-2 py-1 -mt-1 text-sm leading-tight transform transition duration-500 ease-in-out   -translate-x-3/4 -translate-y-full bg-gray-700 text-gray-100 border-gray-500 border-2 rounded shadow-sm"
+                                            <div class="z-10">
+                                                <div class="absolute text-center -top-14 left-2 z-10 w-32 md:w-52 px-2 py-1 text-sm leading-tight transform transition duration-500 ease-in-out -translate-x-1/2 bg-gray-700 text-gray-100 border-gray-500 border-2 rounded shadow-sm"
                                                 x-show="tooltip">
-                                                  <span class="font-semibold">Mark Canceled</span>  <br /><span class="text-xs text-gray-500 pl-2">Service will be canceled.</span>
+                                                <span class="font-semibold">Mark Canceled</span>  <br /><span class="text-xs text-gray-500 pl-2">Service will be canceled.</span>
                                                 </div>
                                             </div>
                                         </a>
-
-                                    </div>
-
                                     @else
                                         @if ($service->isCanceled())
-                                        <x-button height="h-8" type="submit" buttonType="danger-light" withIcon="true" class="sm:h-9 sm:px-2" disabled="disabled">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                            </svg>
-                                        </x-button>
+                                        <a class="inline-block">
+                                            <x-button height="h-8" type="submit" buttonType="danger-light" withIcon="true" class="sm:h-9 sm:px-2" disabled="disabled">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                                </svg>
+                                            </x-button>
+                                        </a>
+
                                         @endif
 
                                         @if ($service->isCompleted() || $service->isNotPending())
-                                        <x-button height="h-8" buttonType="light-success" withIcon="true" disabled="disabled" class="sm:h-9 sm:px-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                            </svg>
-                                        </x-button>
-                                        @endif
+                                        <a class="inline-block">
+                                            <x-button height="h-8" buttonType="primary-light" withIcon="true" disabled="disabled" class="sm:h-9 sm:px-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                </svg>
+                                            </x-button>
+                                        </a>
 
+                                        @endif
                                     @endif
+
+                                    <div x-on:click="isDescriptionActive = ! isDescriptionActive" class="relative inline-block">
+                                        <a x-data="{ tooltip: false }">
+                                            <x-button height="h-8" buttonType="light" withIcon="true" class="sm:h-9 sm:px-2" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 s:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                            </x-button>
+
+                                            <div class="z-50">
+                                                <div class="absolute text-center -top-10 -left-2 z-50 w-14 md:w-14 px-2 py-1 text-sm leading-tight transform transition duration-500 ease-in-out bg-gray-700 text-gray-100 border-gray-500 border-2 rounded shadow-sm"
+                                                x-show="tooltip">
+                                                    <span class="font-semibold">View</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+
                                 </div>
+                                @php
+                                    $type = 'info';
+                                    $lable = null;
+                                    if($service->isPending()){
+                                        $type = 'info';
+                                        $lable = 'Pending';
+                                    }else if($service->isCanceled()){
+                                        $type = 'danger';
+                                        $lable = 'Canceled';
+                                    }else if($service->isNotPending() || $service->isCompleted()){
+                                        $type = 'success';
+                                    }
+
+                                @endphp
+                                <x-modal x-show="isDescriptionActive" toggle="isDescriptionActive" type="{{$type}}">
+                                    <x-slot name="header">
+                                        <div id="modal-title">
+                                            <h3 class="text-lg leading-6 font-medium text-gray-900">
+                                                {!! $service->name !!}
+
+                                                <x-pill type="{!! $service->statusType() !!}" value="{!! $service->statusText() !!}" />
+                                            </h3>
+                                        </div>
+
+                                    </x-slot>
+                                    <x-slot name="body">
+                                        <div class="mt-2 text-sm text-gray-500 space-y-2">
+                                            <p>{!! $service->description !!}</p>
+
+                                            <div class="mr-1">
+                                                <div class="inline-flex">
+                                                    <p class="mr-2 text-gray-600 font-semibold">Scheduled On:</p>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-{{$color}}-500 text-opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                    </svg>
+                                                    <span class="text-xs font-semibold sm:text-sm">
+                                                        {{ $service->scheduledAt()->toFormattedDateString() }}
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <div class="mr-1">
+                                                <div class="inline-flex">
+                                                    <p class="mr-2 text-gray-600 font-semibold">Serviced On:</p>
+                                                    @if ($service->isNotPending())
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-{{$color}}-500 text-opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                        </svg>
+                                                    @endif
+                                                    <span class="text-xs font-semibold sm:text-sm">
+                                                        {{ $service->isNotPending() ? $service->scheduledAt()->toFormattedDateString() : 'NA'}}
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <div class="mr-1">
+                                                <div class="inline-flex">
+                                                    <p class="mr-2 text-gray-600 font-semibold">Created At:</p>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-{{$color}}-500 text-opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                        </svg>
+                                                    <span class="text-xs font-semibold sm:text-sm">
+                                                        {{ $service->createdAt()->toFormattedDateString()}}
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <div class="mr-1">
+                                                <div class="inline-flex">
+                                                    <p class="mr-2 text-gray-600 font-semibold">Updated At:</p>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-{{$color}}-500 text-opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                        </svg>
+                                                    <span class="text-xs font-semibold sm:text-sm">
+                                                        {{ $service->updatedAt()->toFormattedDateString()}}
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </x-slot>
+                                </x-modal>
                             </div>
                             @endforeach
-                            <div class="md:px-8 my-3 px-3">
-                                {{ $services->links() }}
+                            <div class="md:px-6 my-3 px-3">
+                                @if (!$services->hasPages())
+                                <p class="text-sm text-gray-700 leading-5">
+                                    {!! __('Showing') !!}
+                                    <span class="font-medium">{{ $services->firstItem() }}</span>
+                                    {!! __('to') !!}
+                                    <span class="font-medium">{{ $services->lastItem() }}</span>
+                                    {!! __('of') !!}
+                                    <span class="font-medium">{{ $services->total() }}</span>
+                                    {!! __('results') !!}
+                                </p>
+                                @else
+                                    {{ $services->links() }}
+                                @endif
                             </div>
                         </div>
 

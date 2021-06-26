@@ -60,7 +60,7 @@ class VehicleServiceController extends Controller
         // If trying to create monthly service but active monthly service already exists
         if ($request->type_id == VehicleService::TYPE_MONTHLY) {
             $disallow = $services->get()->filter(function($service){
-                return $service->isMonthly() && $service->isOnlyPending();
+                return $service->isMonthly() && $service->isPending();
             })->isNotEmpty();
 
 
