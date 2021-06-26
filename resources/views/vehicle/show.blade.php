@@ -89,8 +89,8 @@
                                     $color = 'red';
                                 }
                             @endphp
-                            <div class="flex justify-between items-start md:my-8 md:px-8 my-3 px-3">
-                                <div class="flex items-start">
+                            <div class="flex justify-between items-start md:my-8 md:px-8 my-3 px-3" x-data="{ isDescriptionActive: false }">
+                                <div class="w-1/2 flex items-start">
                                     <div class="relative bg-{{$color}}-50 bg-opacity-50 ring-1 ring-opacity-25 border-2 border-{{$color}}-100 border-opacity-75 ring-{{$color}}-50 w-11 h-11 md:w-14 md:h-14 mx-auto mr-3 flex justify-items-center items-center rounded-full">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-5 text-opacity-{{$textOpacity}} sm:w-6 sm:h-6 mx-auto text-{{$color}}-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
@@ -121,33 +121,30 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="pt-2">
+                                <div class="w-1/2 pt-2 flex items-center space-x-2">
                                     @if ($service->isOnlyPending())
-                                    <div class="flex items-center space-x-2">
-
                                         @if ($service->isMonthly())
-                                        <a href="{{ route('vehicles.services.serviced', [ 'vehicle' => $vehicle, 'service' => $service]) }}" x-data="{ tooltip: false }">
-                                            <x-button height="h-8" type="submit" buttonType="light-success" withIcon="true" class="sm:h-9 sm:px-2" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                </svg>
-                                            </x-button>
+                                            <a href="{{ route('vehicles.services.serviced', [ 'vehicle' => $vehicle, 'service' => $service]) }}" x-data="{ tooltip: false }">
+                                                <x-button height="h-8" type="submit" buttonType="light-success" withIcon="true" class="sm:h-9 sm:px-2" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                </x-button>
 
-                                            <div class="relative">
-                                                <div class="absolute text-center -top-10 z-50 w-32 md:w-52 px-2 py-1 -mt-1 text-sm leading-tight transform transition duration-500 ease-in-out   -translate-x-1/2 -translate-y-full bg-gray-700 text-gray-100 border-gray-500 border-2 rounded shadow-sm"
-                                                x-show="tooltip">
-                                                <span class="font-semibold">Mark Serviced</span> <br /><span class="text-xs text-gray-500 pl-2">This will also create next service.</span>
+                                                <div class="relative">
+                                                    <div class="absolute text-center -top-10 z-50 w-32 md:w-52 px-2 py-1 -mt-1 text-sm leading-tight transform transition duration-500 ease-in-out   -translate-x-1/2 -translate-y-full bg-gray-700 text-gray-100 border-gray-500 border-2 rounded shadow-sm"
+                                                    x-show="tooltip">
+                                                    <span class="font-semibold">Mark Serviced</span> <br /><span class="text-xs text-gray-500 pl-2">This will also create next service.</span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </a>
+                                            </a>
                                         @endif
 
                                         <a href="{{ route('vehicles.services.complete', [ 'vehicle' => $vehicle, 'service' => $service]) }}" x-data="{ tooltip: false }">
-
                                             <x-button height="h-8" type="submit" buttonType="secondary" withIcon="true" class="sm:h-9 sm:px-2" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-                                                  </svg>
+                                                </svg>
                                             </x-button>
 
                                             <div class="relative z-50">
@@ -165,22 +162,19 @@
                                             <x-button height="h-8" type="submit" buttonType="danger-light" withIcon="true" class="sm:h-9 sm:px-2" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                                  </svg>
+                                                </svg>
                                             </x-button>
 
                                             <div class="relative z-50">
                                                 <div class="absolute text-center -top-10 z-50 w-32 md:w-52 px-2 py-1 -mt-1 text-sm leading-tight transform transition duration-500 ease-in-out   -translate-x-3/4 -translate-y-full bg-gray-700 text-gray-100 border-gray-500 border-2 rounded shadow-sm"
                                                 x-show="tooltip">
-                                                  <span class="font-semibold">Mark Canceled</span>  <br /><span class="text-xs text-gray-500 pl-2">Service will be canceled.</span>
+                                                <span class="font-semibold">Mark Canceled</span>  <br /><span class="text-xs text-gray-500 pl-2">Service will be canceled.</span>
                                                 </div>
                                             </div>
                                         </a>
-
-                                    </div>
-
                                     @else
                                         @if ($service->isCanceled())
-                                        <x-button height="h-8" type="submit" buttonType="danger-light" withIcon="true" class="sm:h-9 sm:px-2" disabled="disabled">
+                                        <x-button height="h-8" type="submit" buttonType="danger-light" withIcon="true" class="sm:h-9 sm:px-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                                             </svg>
@@ -194,9 +188,15 @@
                                             </svg>
                                         </x-button>
                                         @endif
-
                                     @endif
+
+                                    <x-button height="h-8" buttonType="light" withIcon="true" class="sm:h-9 sm:px-2"  x-bind:disabled="isDescriptionActive == true" x-on:click="isDescriptionActive = ! isDescriptionActive">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 s:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                    </x-button>
                                 </div>
+                                <x-modal x-show="isDescriptionActive" toggle="isDescriptionActive" type="success" header="Description" body="{!! $service->description !!}" />
                             </div>
                             @endforeach
                             <div class="md:px-8 my-3 px-3">
