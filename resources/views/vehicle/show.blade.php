@@ -188,7 +188,7 @@
 
                                         @endif
 
-                                        @if ($service->isCompleted() || $service->isNotPending())
+                                        @if (($service->isCompleted() || $service->isNotPending()) && ! $service->isCanceled())
                                         <a class="inline-block">
                                             <x-button height="h-8 sm:h-9" buttonType="primary-light" padding="px-1 sm:px-2.5" disabled="disabled" class="sm:h-9 sm:px-2">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -241,7 +241,6 @@
                                                 </svg>
                                             </x-button>
                                         </form>
-
 
                                         <div class="z-50">
                                             <div class="absolute text-center -top-10 -left-3 z-50 w-14 md:w-16 px-2 py-1 text-sm leading-tight transform transition duration-500 ease-in-out bg-gray-700 text-gray-100 border-gray-500 border-2 rounded shadow-sm"
