@@ -19,7 +19,8 @@ class VehicleServiceSeeder extends Seeder
             'description'  => 'Bike Monthly Service',
             'vehicle_id'   => 1,
             'type_id'      => 1,
-            'scheduled_at' => now()
+            'scheduled_at' => now(),
+            'user_id'      => 1,
         ]);
 
         VehicleService::create([
@@ -28,6 +29,7 @@ class VehicleServiceSeeder extends Seeder
             'vehicle_id'   => 1,
             'type_id'      => 2,
             'scheduled_at' => now()->addMonth(),
+            'user_id'      => 1,
         ]);
 
         VehicleService::create([
@@ -36,7 +38,9 @@ class VehicleServiceSeeder extends Seeder
             'vehicle_id'   => 1,
             'type_id'      => 1,
             'scheduled_at' => now()->subMonth(2),
-            'serviced_at'  => now()->subMonth(2)
+            'serviced_at'  => null,
+            'canceled_at'  => now()->subMonth(2),
+            'user_id'      => 1,
         ]);
 
         VehicleService::create([
@@ -45,7 +49,8 @@ class VehicleServiceSeeder extends Seeder
             'vehicle_id'   => 1,
             'type_id'      => 1,
             'scheduled_at' => now()->subMonth(3),
-            'serviced_at'  => now()->subMonth(3)
+            'serviced_at'  => now()->subMonth(3),
+            'user_id'      => 1,
         ]);
     }
 }

@@ -39,4 +39,14 @@ class VehicleService extends Model
     {
         return $this->belongsTo(Vehicle::class);
     }
+
+    /**
+     * Get the user that owns the VehicleService
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

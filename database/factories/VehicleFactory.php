@@ -27,7 +27,7 @@ class VehicleFactory extends Factory
             'manufacturer'            => collect(['Honda', 'Bajaj', 'KTM', 'Royal Enfield', 'Hero'])->random(),
             'rc'                      => $this->faker->regexify('[A-Z]{6}[0-6]{3}'),
             'monthly_service_in_days' => 22,
-            'category_id'             => 1,
+            'category_id'             => collect([1, 2])->random(),
             'user_id'                 => 1
         ];
     }
