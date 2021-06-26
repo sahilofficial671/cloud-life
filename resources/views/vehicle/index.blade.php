@@ -10,7 +10,7 @@
             <div class="pb-2">
                 <div class="sm:flex sm:flex-wrap items-center">
                     <div class="left sm:w-1/2 text-left">
-                        <x-back href="route('dashboard')" value="Back to Dashboard"/>
+                        <x-back :href="route('dashboard')" value="Back to Dashboard"/>
                     </div>
                     <div class="right sm:w-1/2 sm:text-right ml-3 sm:ml-0">
                         <a href="{{route('vehicles.create')}}">
