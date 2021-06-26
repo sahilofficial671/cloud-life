@@ -51,7 +51,7 @@
 
                             </div>
                             <x-button type="submit">
-                                {{ __('Updated') }}
+                                {{ __('Update') }}
                             </x-button>
                         </form>
                     </x-slot>
