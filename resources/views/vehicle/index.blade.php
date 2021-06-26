@@ -1,7 +1,7 @@
 
 <x-app-layout>
     <x-slot name="header">
-        {{ __('Vehicles') }}
+        Vehicles
     </x-slot>
 
     <div class="py-10">
@@ -10,9 +10,7 @@
             <div class="pb-2">
                 <div class="sm:flex sm:flex-wrap items-center">
                     <div class="left sm:w-1/2 text-left">
-                        @if ($vehicles->isEmpty())
-                        No vehicles yet.
-                        @endif
+                        <x-back href="route('dashboard')" value="Back to Dashboard"/>
                     </div>
                     <div class="right sm:w-1/2 sm:text-right ml-3 sm:ml-0">
                         <a href="{{route('vehicles.create')}}">
@@ -20,19 +18,22 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                                 </svg>
-
-                                {{ __('Add New') }}
+                                Add New
                             </x-button>
                         </a>
                     </div>
                 </div>
+
+                @if ($vehicles->isEmpty())
+                    No vehicles yet.
+                @endif
             </div>
 
             <x-alert />
 
             <div class="sm:flex sm:flex-wrap">
                 @foreach ($vehicles as $vehicle)
-                <div class="md:w-1/3 text-center">
+                <div class="md:w-1/3 text-center p-2">
                     <a href="{{ route('vehicles.show', $vehicle) }}">
                         <x-card width="max-w-xs md:max-w-sm" class="ring-1 ring-indigo-50 hover:ring-2 hover:ring-indigo-50 ring-opacity-75 group transition-all duration-300 ease-in-out transform hover:-translate-y-2">
                             <x-slot name="body">
