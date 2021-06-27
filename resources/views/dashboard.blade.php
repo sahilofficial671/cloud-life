@@ -13,7 +13,7 @@
 
                     <div class="md:w-1/2 lg:w-1/3 p-4">
                         <a href="{{ route('vehicles.index') }}">
-                            <x-card width="max-w-xs md:max-w-sm" class="mx-auto ring-1 ring-indigo-50 hover:ring-4 hover:ring-indigo-100 ring-opacity-75">
+                            <x-card width="w-full sm:max-w-xs md:max-w-sm" class="mx-auto ring-1 ring-indigo-50 hover:ring-4 hover:ring-indigo-100 ring-opacity-75">
                                 <x-slot name="body">
                                     <div class="group">
                                         <div class="flex justify-between items-center">
