@@ -77,7 +77,4 @@ jobs:
         DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
 
     - name: Optimzations
-      run: php artisan config:cache; \
-           php artisan cache:clear; \
-           php artisan route:clear; \
-           php artisan view:clear
+      run: php artisan optimize:clear
