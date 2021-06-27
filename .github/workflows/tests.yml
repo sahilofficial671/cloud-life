@@ -1,0 +1,84 @@
+name: Tests
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+    types: [opened, synchronize, reopened]
+env:
+  php-version: '7.3'
+  node-version: 15
+
+jobs:
+  tests:
+    services:
+      mysql:
+            image: mysql:5.7
+            env:
+              MYSQL_ROOT_PASSWORD: ${{ secrets.DB_PASSWORD }}
+              MYSQL_DATABASE: db_url_shortener
+            ports:
+              - 3307:3306
+            options: >-
+              --health-cmd="mysqladmin ping"
+              --health-interval=10s
+              --health-timeout=5s
+              --health-retries=3
+    runs-on: ubuntu-latest
+    name: Tests
+
+    steps:
+    - name: Checkout sources
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Setup PHP ${{ env.php-version }}
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ env.php-version }}
+        extensions: mbstring, dom, fileinfo
+        coverage: none
+
+    - name: Check PHP Version
+      run: php -v
+    - name: Check Composer Version
+      run: composer -V
+    - name: Check PHP Extensions
+      run: php -m
+
+    - name: Copy .env
+      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+
+    - name: Validate composer.json and composer.lock
+      run: composer validate
+
+    - name: Install Dependencies
+      run: composer install --no-progress --no-interaction --prefer-dist --optimize-autoloader
+
+    - name: Install NPM Dependencies
+      run: npm install
+
+    - name: Generate key
+      run: php artisan key:generate
+
+    - name: Directory Permissions
+      run: chmod -R 777 storage bootstrap/cache
+
+    - name: Create Database & Migrate
+      run: php artisan migrate
+
+    - name: Optimzations
+      run: php artisan config:cache; \
+           php artisan cache:clear; \
+           php artisan route:clear; \
+           php artisan view:clear; \
+
+      env:
+        DB_CONNECTION: mysql
+        DB_DATABASE: db_url_shortener
+        DB_PORT: 3307
+        DB_USER: root
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
