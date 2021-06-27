@@ -15,7 +15,7 @@
 
                     <div class="md:w-1/2 lg:w-1/3 p-4">
                         <a href="{{ route('vehicles.index') }}">
-                            <x-card width="max-w-xs md:max-w-sm" class="ring-1 ring-indigo-50 hover:ring-4 hover:ring-indigo-100 ring-opacity-75">
+                            <x-card width="max-w-xs md:max-w-sm" class="mx-auto ring-1 ring-indigo-50 hover:ring-4 hover:ring-indigo-100 ring-opacity-75">
                                 <x-slot name="body">
                                     <div class="group">
                                         <div class="flex justify-between items-center">
@@ -24,7 +24,7 @@
                                                 <p class="leading-tight text-gray-500 text-sm sm:text-base">Sleek vehicles management out-of-the-box.</p>
                                             </div>
                                             <div class="right w-1/4 text-center px-4 sm:px-6">
-                                                <div class="text-8xl md:text-9xl font-semibold md:font-bold text-indigo-100 bg-opacity-70 -ml-4 transition-all duration-300 ease-in-out">
+                                                <div class="text-8xl lg:text-9xl font-semibold md:font-bold text-indigo-100 bg-opacity-70 -ml-4 transition-all duration-300 ease-in-out">
                                                     {{ $vehicles }}
                                                 </div>
                                             </div>
