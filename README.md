@@ -5,5 +5,5 @@ CLoud life is an personal CRM.
 
 ### Features
 
-- Financial Management 💰
 - Vehicle Management 🚲
+- Finance Management 💰 (Upcoming)
