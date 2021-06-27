@@ -69,16 +69,15 @@ jobs:
 
     - name: Create Database & Migrate
       run: php artisan migrate
-
-    - name: Optimzations
-      run: php artisan config:cache; \
-           php artisan cache:clear; \
-           php artisan route:clear; \
-           php artisan view:clear; \
-
       env:
         DB_CONNECTION: mysql
         DB_DATABASE: cloud_life
         DB_PORT: 3307
         DB_USER: root
         DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+
+    - name: Optimzations
+      run: php artisan config:cache; \
+           php artisan cache:clear; \
+           php artisan route:clear; \
+           php artisan view:clear; \
