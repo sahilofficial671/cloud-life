@@ -31,7 +31,7 @@
 @endphp
 
 <div aria-labelledby="modal-title" role="dialog" aria-modal="true" {!! $attributes->merge(['class' => 'fixed z-10 inset-0 overflow-y-auto']) !!} x-class="{'sahil' : {{$toggle}} == true }">
-    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block -mt-24 sm:-mt-0 sm:p-0">
+    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block">
 
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
 

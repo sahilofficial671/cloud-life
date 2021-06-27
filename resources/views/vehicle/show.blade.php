@@ -263,14 +263,14 @@
                                     <x-slot name="header">
                                         <div class="flex justify-between">
                                             <div id="modal-title">
-                                                <h3 class="text-lg leading-6 font-medium text-gray-900">
+                                                <h3 class="text-md md:text-lg font-semibold leading-6text-gray-900">
                                                     {!! $service->name !!}
 
                                                     <x-pill type="{!! $service->statusType() !!}" value="{!! $service->statusText() !!}" />
                                                 </h3>
                                             </div>
 
-                                            <div class="font-semibold bg-gray-100 px-2 py-1 text-xs rounded border-2 border-gray-100 border-opacity-0">
+                                            <div class="font-semibold bg-gray-100 px-2 py-1 text-xs rounded border-2 border-gray-100 border-opacity-0 w-14 sm:w-auto h-7">
                                                 ID: {{ $service->id }}
                                             </div>
                                         </div>
