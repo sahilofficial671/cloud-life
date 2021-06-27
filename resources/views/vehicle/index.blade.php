@@ -8,7 +8,7 @@
         <div class="max-w-7xl px-3 mx-auto sm:px-6 lg:px-8">
 
             <div class="pb-2">
-                <div class="sm:flex sm:flex-wrap items-center">
+                <div class="flex flex-wrap items-center justify-between">
                     <div class="left sm:w-1/2 text-left">
                         <x-back :href="route('dashboard')" value="Back to Dashboard"/>
                     </div>
@@ -33,7 +33,7 @@
 
             <div class="sm:flex sm:flex-wrap">
                 @foreach ($vehicles as $vehicle)
-                <div class="md:w-1/3 text-center p-2">
+                <div class="md:w-1/3 text-center py-2 sm:py-0 sm:px-2">
                     <a href="{{ route('vehicles.show', $vehicle) }}">
                         <x-card width="w-full sm:max-w-xs md:max-w-sm" class="mx-auto ring-1 ring-indigo-50 hover:ring-2 hover:ring-indigo-50 ring-opacity-75 group transition-all duration-300 ease-in-out transform hover:-translate-y-2">
                             <x-slot name="body">
