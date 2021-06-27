@@ -281,6 +281,24 @@
 
                                             <div class="mr-1">
                                                 <div class="inline-flex">
+                                                    <p class="mr-2 text-gray-600 font-semibold">Vehicle:</p>
+                                                    <span class="text-xs font-semibold sm:text-sm">
+                                                        {{ $vehicle->model }}
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <div class="mr-1">
+                                                <div class="inline-flex">
+                                                    <p class="mr-2 text-gray-600 font-semibold">Manufacturer:</p>
+                                                    <span class="text-xs font-semibold sm:text-sm">
+                                                        {{ $vehicle->manufacturer }}
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <div class="mr-1">
+                                                <div class="inline-flex">
                                                     <p class="mr-2 text-gray-600 font-semibold">Scheduled On:</p>
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-opacity-100 {{ $service->isPending() ? 'text-indigo-500' : ''}} {{ ($service->isCompleted() || $service->isServiced()) ? 'text-green-500' : ''}} {{ $service->isCanceled() ? 'text-red-500' : ''}}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
