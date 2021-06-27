@@ -6,14 +6,13 @@ use App\Actions\Fortify\CreateNewUser;
 use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
+use App\Models\User;
+use Hash;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
-
-use App\Models\User;
-use Hash;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -37,8 +36,8 @@ class FortifyServiceProvider extends ServiceProvider
         /**
          * ------------------------------
          * Login
-         * ------------------------------
-        */
+         * ------------------------------.
+         */
         Fortify::loginView(function () {
             return view('auth.login');
         });
@@ -59,8 +58,8 @@ class FortifyServiceProvider extends ServiceProvider
         /**
          * ------------------------------
          * Email Verification
-         * ------------------------------
-        */
+         * ------------------------------.
+         */
         Fortify::verifyEmailView(function () {
             return view('auth.verify-email');
         });
@@ -68,8 +67,8 @@ class FortifyServiceProvider extends ServiceProvider
         /**
          * ------------------------------
          * Register
-         * ------------------------------
-        */
+         * ------------------------------.
+         */
         Fortify::registerView(function () {
             return view('auth.register');
         });
@@ -79,8 +78,8 @@ class FortifyServiceProvider extends ServiceProvider
         /**
          * ------------------------------
          * Reset Password
-         * ------------------------------
-        */
+         * ------------------------------.
+         */
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
 

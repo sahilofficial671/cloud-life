@@ -2,12 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Vehicle;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
-use App\Models\Vehicle;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -44,7 +43,7 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
-     * Get all of the vehicles
+     * Get all of the vehicles.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

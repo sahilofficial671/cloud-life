@@ -2,15 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-
 use App\Traits\Vehicle\Service\HasCarbonDates;
 use App\Traits\Vehicle\Service\HasServiceStasuses;
 use App\Traits\Vehicle\Service\HasServiceTypes;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class VehicleService extends Model
 {
@@ -28,11 +27,11 @@ class VehicleService extends Model
         'serviced_at',
         'completed_at',
         'canceled_at',
-        'user_id'
+        'user_id',
     ];
 
     /**
-     * Get the vehicle that owns the VehicleService
+     * Get the vehicle that owns the VehicleService.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -42,7 +41,7 @@ class VehicleService extends Model
     }
 
     /**
-     * Get the user that owns the VehicleService
+     * Get the user that owns the VehicleService.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

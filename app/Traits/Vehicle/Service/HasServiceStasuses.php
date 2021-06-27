@@ -4,13 +4,13 @@ namespace App\Traits\Vehicle\Service;
 
 use Carbon\Carbon;
 
-trait HasServiceStasuses{
-
+trait HasServiceStasuses
+{
     /**
-     * If service is pending
+     * If service is pending.
      *
-     * @return boolean
-    */
+     * @return bool
+     */
     public function isPending()
     {
         return is_null($this->serviced_at)
@@ -19,59 +19,59 @@ trait HasServiceStasuses{
     }
 
     /**
-     * If service is not pending
+     * If service is not pending.
      *
-     * @return boolean
-    */
+     * @return bool
+     */
     public function isNotPending()
     {
         return ! is_null($this->serviced_at);
     }
 
     /**
-     * If service is not pending
+     * If service is not pending.
      *
-     * @return boolean
-    */
+     * @return bool
+     */
     public function isCanceled()
     {
         return isset($this->canceled_at);
     }
 
     /**
-     * If service is not pending
+     * If service is not pending.
      *
-     * @return boolean
-    */
+     * @return bool
+     */
     public function isCompleted()
     {
         return isset($this->completed_at);
     }
 
     /**
-     * If service is serviced
+     * If service is serviced.
      *
-     * @return boolean
-    */
+     * @return bool
+     */
     public function isServiced()
     {
         return isset($this->serviced_at);
     }
 
     /**
-     * Get service status type
+     * Get service status type.
      *
      * @return string
-    */
+     */
     public function statusType()
     {
         $label = '';
 
-        if($this->isPending()){
+        if ($this->isPending()) {
             $label = 'info';
-        }else if($this->isCanceled()){
+        } elseif ($this->isCanceled()) {
             $label = 'danger';
-        }else if($this->isNotPending() || $this->isCompleted()){
+        } elseif ($this->isNotPending() || $this->isCompleted()) {
             $label = 'success';
         }
 
@@ -79,19 +79,19 @@ trait HasServiceStasuses{
     }
 
     /**
-     * Get service status text
+     * Get service status text.
      *
      * @return string
-    */
+     */
     public function statusText()
     {
         $text = '';
 
-        if($this->isPending()){
+        if ($this->isPending()) {
             $text = 'Pending';
-        }else if($this->isCanceled()){
+        } elseif ($this->isCanceled()) {
             $text = 'Canceled';
-        }else if($this->isNotPending() || $this->isCompleted()){
+        } elseif ($this->isNotPending() || $this->isCompleted()) {
             $text = 'Completed';
         }
 

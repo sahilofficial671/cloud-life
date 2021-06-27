@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
+use App\Traits\HasTimestampCarbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Traits\HasTimestampCarbon;
 
 class Vehicle extends Model
 {
@@ -18,11 +18,11 @@ class Vehicle extends Model
         'rc',
         'monthly_service_in_days',
         'user_id',
-        'category_id'
+        'category_id',
     ];
 
     /**
-     * Get the user that owns the Vehicle
+     * Get the user that owns the Vehicle.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -32,7 +32,7 @@ class Vehicle extends Model
     }
 
     /**
-     * Get the category that vehicle belongs to
+     * Get the category that vehicle belongs to.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -42,12 +42,12 @@ class Vehicle extends Model
     }
 
     /**
-     * Get all of the services for the Vehicle
+     * Get all of the services for the Vehicle.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function services()
     {
-        return $this->hasMany(VehicleService::class,);
+        return $this->hasMany(VehicleService::class, );
     }
 }
