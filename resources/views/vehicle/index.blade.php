@@ -4,7 +4,7 @@
         Vehicles
     </x-slot>
 
-    <div class="py-10">
+    <div class="pt-3 pb-6 sm:py-10">
         <div class="max-w-7xl px-3 mx-auto sm:px-6 lg:px-8">
 
             <div class="pb-2">
