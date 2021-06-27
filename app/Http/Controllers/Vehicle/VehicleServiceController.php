@@ -10,6 +10,7 @@ use App\Models\VehicleService;
 use Illuminate\Validation\Rule;
 use Carbon\Carbon;
 use Illuminate\Validation\Validator;
+use Auth;
 
 class VehicleServiceController extends Controller
 {
@@ -68,7 +69,11 @@ class VehicleServiceController extends Controller
             }
         }
 
-        $services->create($validator->validated());
+        $services->create(
+            collect($validator->validated())
+                ->merge(['user_id' => Auth::id()])
+                ->toArray()
+        );
 
         return redirect()->route('vehicles.show', $vehicle)->with(['success' => 'Successfully Created.']);
     }

@@ -27,7 +27,8 @@ class VehicleService extends Model
         'scheduled_at',
         'serviced_at',
         'completed_at',
-        'canceled_at'
+        'canceled_at',
+        'user_id'
     ];
 
     /**
