@@ -12,39 +12,131 @@
 
             <x-card width="sm:max-w-lg" class="mx-auto">
                 <x-slot name="body">
-                    <div class="px-6 py-4">
+                    <div class="px-3 md:px-6 py-4">
                         <div class="flex justify-between items-start">
                             <div class="left flex items-center">
 
-                                <div class="flex items-center justify-items-center bg-indigo-100 bg-opacity-25 p-1 rounded-full w-16 h-16 mr-2 group-hover:bg-white group-hover:border-2 group-hover:border-indigo-200 border-2 border-indigo-100 ring-2 ring-indigo-50 ring-opacity-25 group-hover:ring-opacity-75 group-hover:ring-indigo-100">
+                                <div class="flex items-center justify-items-center bg-indigo-100 bg-opacity-25 p-1 rounded-full w-12 h-12 md:w-16 md:h-16 mr-2 group-hover:bg-white group-hover:border-2 group-hover:border-indigo-200 border-2 border-indigo-100 ring-2 ring-indigo-50 ring-opacity-25 group-hover:ring-opacity-75 group-hover:ring-indigo-100">
                                     @if ($vehicle->category->isTwoWheeler())
-                                        <img src="{{ asset('images/bike/bike-image.svg') }}" alt="Bike" class="inline-flex mr-3">
+                                    <img src="{{ asset('images/bike/bike-image.svg') }}" alt="Bike" class="inline-flex mr-3">
                                     @endif
 
                                     @if ($vehicle->category->isFourWheeler())
-                                        <x-icons.car class="w-6 mx-auto"/>
+                                    <x-icons.car class="w-6 mx-auto"/>
                                     @endif
                                 </div>
 
                                 <div class="details inline-flex flex-col items-start pt-1">
                                     <div class="text-xs text-indigo-600 font-semibold">{{$vehicle->category->name }}</div>
-                                    <h4 class="text-xl font-semibold">{{ __($vehicle->model) }}</h4>
+                                    <h4 class="text-md md:text-xl font-semibold">{{ __($vehicle->model) }}</h4>
                                     <span class="bg-gray-100 px-2 py-1 text-xs rounded font-semibold group-hover:bg-white border-2 border-gray-100 border-opacity-0 group-hover:border-opacity-100 group-hover:border-2 group-hover:border-gray-100">{{ $vehicle->rc }}</span>
                                 </div>
                             </div>
                             <div class="right flex flex-col justify-between">
-                                <div class="bg-gray-100 px-2 py-1 text-xs rounded group-hover:bg-white border-2 border-gray-100 border-opacity-0 group-hover:border-opacity-100 group-hover:border-2 group-hover:border-gray-100">ID: {{ $vehicle->id }}</div>
-                                <div class="text-center">
-                                    <form method="POST" action="{{route('vehicles.destroy', $vehicle)}}">
-                                        @csrf
-                                        <input type="hidden" name="_method" value="delete" />
-                                        <x-button buttonType="danger-light" height="h-7" type="submit" class="mt-5">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                              </svg>
-                                        </x-button>
-                                    </form>
+                                <div>
+                                    <div class="bg-gray-100 px-2 py-1 text-xs text-center rounded border-2 border-gray-100 border-opacity-0 font-semibold">ID: {{ $vehicle->id }}
+                                    </div>
                                 </div>
+
+
+                                <div class="flex items-center">
+                                    <div x-data="{ isViewActive: false }">
+                                        <div class="relative mr-1"  x-on:click="isViewActive = ! isViewActive">
+                                            <a x-data="{ tooltip: false }">
+                                                <x-button height="h-7" buttonType="light" padding="px-2 sm:px-2.5" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false" class="mt-5">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 s:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                    </svg>
+                                                </x-button>
+
+                                                <div class="z-50">
+                                                    <div class="absolute text-center -top-4 -left-3 z-50 w-14 md:w-16 px-2 py-1 text-sm leading-tight transform transition duration-500 ease-in-out bg-gray-700 text-gray-100 border-gray-500 border-2 rounded shadow-sm"
+                                                    x-show="tooltip">
+                                                        <span class="font-semibold">View</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
+                                        <x-modal x-show="isViewActive" toggle="isViewActive" type="info">
+                                            <x-slot name="header">
+                                                <div class="flex justify-between">
+                                                    <div id="modal-title">
+                                                        <h3 class="text-md md:text-lg font-semibold leading-6text-gray-900">
+                                                            <span>{!! $vehicle->model !!}</span>
+
+                                                            <x-pill type="info" value="{!! $vehicle->rc !!}" />
+                                                        </h3>
+                                                    </div>
+
+                                                    <div class="font-semibold bg-gray-100 px-2 py-1 text-xs rounded border-2 border-gray-100 border-opacity-0 w-14 sm:w-auto h-7">
+                                                        ID: {{ $vehicle->id }}
+                                                    </div>
+                                                </div>
+                                            </x-slot>
+                                            <x-slot name="body">
+                                                <div class="mt-2 text-sm text-gray-500 space-y-2">
+                                                    <p>{!! $vehicle->detail !!}</p>
+
+                                                    <div class="mr-1">
+                                                        <div class="inline-flex">
+                                                            <p class="mr-2 text-gray-600 font-semibold">Model:</p>
+                                                            <span class="text-xs font-semibold sm:text-sm">
+                                                                {{ $vehicle->model }}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="mr-1">
+                                                        <div class="inline-flex">
+                                                            <p class="mr-2 text-gray-600 font-semibold">Manufacturer:</p>
+                                                            <span class="text-xs font-semibold sm:text-sm">
+                                                                {{ $vehicle->manufacturer }}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="mr-1">
+                                                        <div class="inline-flex">
+                                                            <p class="mr-2 text-gray-600 font-semibold">Created At:</p>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-opacity-100 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                            </svg>
+                                                            <span class="text-xs font-semibold sm:text-sm">
+                                                                {{ $vehicle->createdAt()->toFormattedDateString()}}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="mr-1">
+                                                        <div class="inline-flex">
+                                                            <p class="mr-2 text-gray-600 font-semibold">Updated At:</p>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-opacity-100 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                            </svg>
+                                                            <span class="text-xs font-semibold sm:text-sm">
+                                                                {{ $vehicle->updatedAt()->toFormattedDateString()}}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </x-slot>
+                                        </x-modal>
+                                    </div>
+                                    <div>
+                                        <form method="POST" action="{{route('vehicles.destroy', $vehicle)}}">
+                                            @csrf
+                                            <input type="hidden" name="_method" value="delete" />
+                                            <x-button buttonType="danger-light" height="h-7" type="submit" padding="px-2 sm:px-2.5"  class="mt-5">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                  </svg>
+                                            </x-button>
+                                        </form>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>

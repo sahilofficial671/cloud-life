@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-use App\Traits\Vehicle\HasCarbonDates;
+use App\Traits\Vehicle\Service\HasCarbonDates;
 use App\Traits\Vehicle\Service\HasServiceStasuses;
 use App\Traits\Vehicle\Service\HasServiceTypes;
 use Illuminate\Database\Eloquent\Builder;
