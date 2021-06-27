@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Vehicle;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
 use App\Models\Vehicle;
 use App\Models\VehicleCategory;
 use App\Models\VehicleService;
+use Illuminate\Http\Request;
 
 class VehicleController extends Controller
 {
@@ -46,10 +45,10 @@ class VehicleController extends Controller
             'manufacturer'            => ['required', 'string'],
             'rc'                      => ['required', 'string'],
             'monthly_service_in_days' => ['required', 'integer'],
-            'category_id'             => ['required', 'integer', 'exists:vehicle_categories,id']
+            'category_id'             => ['required', 'integer', 'exists:vehicle_categories,id'],
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return back()->with(['error' => $validator->errors()->first()]);
         }
 
@@ -75,7 +74,7 @@ class VehicleController extends Controller
 
         return view('vehicle.show', [
             'vehicle'  => $vehicle,
-            'services' => $services
+            'services' => $services,
         ]);
     }
 
@@ -91,6 +90,6 @@ class VehicleController extends Controller
 
         $vehicle->delete();
 
-        return back()->with(['success' => "Successfully Deleted. Vehicle ID: ".$vehicle->id]);
+        return back()->with(['success' => 'Successfully Deleted. Vehicle ID: '.$vehicle->id]);
     }
 }

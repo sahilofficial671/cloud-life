@@ -5,33 +5,33 @@ namespace App\Traits\Vehicle\Service;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 
-trait HasServiceTypes{
-
+trait HasServiceTypes
+{
     /**
-     * If service is type is monthly
+     * If service is type is monthly.
      *
-     * @return boolean
-    */
+     * @return bool
+     */
     public function isMonthly()
     {
         return $this->type_id === self::TYPE_MONTHLY;
     }
 
     /**
-     * If service is type is custom
+     * If service is type is custom.
      *
-     * @return boolean
-    */
+     * @return bool
+     */
     public function isCustom()
     {
         return $this->type_id === self::TYPE_CUSTOM;
     }
 
-   /**
-     * Get all service types
+    /**
+     * Get all service types.
      *
      * @return \Illuminate\Support\Collection
-    */
+     */
     public static function getTypes()
     {
         return collect([
@@ -41,10 +41,10 @@ trait HasServiceTypes{
     }
 
     /**
-     * Get current service type
+     * Get current service type.
      *
      * @return string
-    */
+     */
     public function getType()
     {
         return [
@@ -54,7 +54,7 @@ trait HasServiceTypes{
     }
 
     /**
-     * Apply the scope to for type
+     * Apply the scope to for type.
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $builder
      * @param  \Illuminate\Database\Eloquent\Model  $model

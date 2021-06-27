@@ -28,7 +28,7 @@ class VehicleFactory extends Factory
             'rc'                      => $this->faker->regexify('[A-Z]{6}[0-6]{3}'),
             'monthly_service_in_days' => 22,
             'category_id'             => collect([1, 2])->random(),
-            'user_id'                 => 1
+            'user_id'                 => 1,
         ];
     }
 }

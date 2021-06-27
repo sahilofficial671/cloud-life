@@ -2,23 +2,23 @@
 
 namespace App\Traits\Vehicle;
 
-trait HasVehicleCategories{
-
+trait HasVehicleCategories
+{
     /**
-     * If category is of Two Wheeler
+     * If category is of Two Wheeler.
      *
-     * @return boolean
-    */
+     * @return bool
+     */
     public function isTwoWheeler()
     {
         return $this->name === 'Two Wheeler';
     }
 
     /**
-     * If category is of Four Wheeler
+     * If category is of Four Wheeler.
      *
-     * @return boolean
-    */
+     * @return bool
+     */
     public function isFourWheeler()
     {
         return $this->name === 'Four Wheeler';

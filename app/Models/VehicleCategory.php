@@ -2,10 +2,9 @@
 
 namespace App\Models;
 
+use App\Traits\Vehicle\HasVehicleCategories;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
-use App\Traits\Vehicle\HasVehicleCategories;
 
 class VehicleCategory extends Model
 {

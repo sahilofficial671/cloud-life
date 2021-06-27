@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Vehicle\VehicleController;
 use App\Http\Controllers\Vehicle\VehicleServiceController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +19,9 @@ use App\Http\Controllers\Vehicle\VehicleServiceController;
 
 Route::get('/', function () {
     return view('index');
-})->name("index");
+})->name('index');
 
-Route::group(["middleware" => ['auth', 'verified']], function(){
+Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('vehicles', VehicleController::class);
@@ -30,11 +29,11 @@ Route::group(["middleware" => ['auth', 'verified']], function(){
     Route::post('vehicles/destroy/bulk', [VehicleController::class, 'destroyBulk'])->name('vehicles.destroy.bulk');
 
     // Vehicle Services
-    Route::prefix('vehicles/{vehicle}/services')->name('vehicles.services')->group(function(){
+    Route::prefix('vehicles/{vehicle}/services')->name('vehicles.services')->group(function () {
         Route::post('/', [VehicleServiceController::class, 'store'])->name('.store');
         Route::get('/create', [VehicleServiceController::class, 'create'])->name('.create');
 
-        Route::prefix('/{service}')->group(function(){
+        Route::prefix('/{service}')->group(function () {
             Route::get('/edit', [VehicleServiceController::class, 'edit'])->name('.edit');
             Route::post('/update', [VehicleServiceController::class, 'update'])->name('.update');
             Route::get('/serviced', [VehicleServiceController::class, 'serviced'])->name('.serviced');

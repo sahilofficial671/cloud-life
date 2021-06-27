@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Vehicle;
+use Illuminate\Database\Seeder;
 
 class VehicleSeeder extends Seeder
 {
@@ -21,7 +21,7 @@ class VehicleSeeder extends Seeder
             'rc'                      => collect(['KSUHF123EKJ', 'EWIRUYIUB', 'AKFGGBTRYO2'])->random(),
             'monthly_service_in_days' => 22,
             'category_id'             => collect([1, 2])->random(),
-            'user_id'                 => 1
+            'user_id'                 => 1,
         ]);
 
         Vehicle::create([
@@ -31,7 +31,7 @@ class VehicleSeeder extends Seeder
             'rc'                      => 'KSUHF123EKJ',
             'monthly_service_in_days' => 30,
             'category_id'             => 2,
-            'user_id'                 => 1
+            'user_id'                 => 1,
         ]);
     }
 }

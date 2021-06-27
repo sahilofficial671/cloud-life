@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\Vehicle;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
 use App\Models\Vehicle;
 use App\Models\VehicleService;
-use Illuminate\Validation\Rule;
-use Carbon\Carbon;
-use Illuminate\Validation\Validator;
 use Auth;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Validator;
 
 class VehicleServiceController extends Controller
 {
@@ -42,12 +41,12 @@ class VehicleServiceController extends Controller
 
         $validator = $this->validateModel($request->all());
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return back()->with(['error' => $validator->errors()->first()]);
         }
 
         // If not past service schedule at should be equal or greater than now.
-        if(! $request->has('serviced_at') && ! (new Carbon($request->scheduled_at))->greaterThanOrEqualTo(now()->startOfDay())){
+        if (! $request->has('serviced_at') && ! (new Carbon($request->scheduled_at))->greaterThanOrEqualTo(now()->startOfDay())) {
             return back()
                     ->with(['error' => 'Scheduled date must be today or any day in future if not past service.'])
                     ->withInput();
@@ -57,12 +56,11 @@ class VehicleServiceController extends Controller
 
         // If trying to create monthly service but active monthly service already exists
         if ($request->type_id == VehicleService::TYPE_MONTHLY) {
-            $disallow = $services->get()->filter(function($service){
+            $disallow = $services->get()->filter(function ($service) {
                 return $service->isMonthly() && $service->isPending();
             })->isNotEmpty();
 
-
-            if($disallow){
+            if ($disallow) {
                 return back()
                         ->with(['error' => 'You already have one monthly service which is not completed! Mark that complete or cancel to continue.'])
                         ->withInput();
@@ -109,7 +107,7 @@ class VehicleServiceController extends Controller
 
         $validator = $this->validateModel($request->all());
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return back()->with(['error' => $validator->errors()->first()]);
         }
 
@@ -124,7 +122,7 @@ class VehicleServiceController extends Controller
      * @param  $inputs
      * @return Illuminate\Validation\Validator
      */
-    public function validateModel($inputs) : \Illuminate\Validation\Validator
+    public function validateModel($inputs): \Illuminate\Validation\Validator
     {
         return validator($inputs, [
             'name'          => ['required', 'string'],
@@ -149,13 +147,13 @@ class VehicleServiceController extends Controller
         $this->authorize('update', $service);
 
         $service->update([
-            'serviced_at'  => now()
+            'serviced_at'  => now(),
         ]);
 
         $message = $service->name.' has been marked completed.';
 
         // Create next service if completed monthly one before.
-        if($service->isMonthly()){
+        if ($service->isMonthly()) {
             $service = $service->replicate();
             $service->scheduled_at = now()->startOfDay()->addDays($vehicle->monthly_service_in_days);
             $service->serviced_at = null;
@@ -180,7 +178,7 @@ class VehicleServiceController extends Controller
 
         $service->update([
             'serviced_at'  => now(),
-            'completed_at' => now()
+            'completed_at' => now(),
         ]);
 
         return back()->with(['success' => $service->name.' has been completed.']);
@@ -198,7 +196,7 @@ class VehicleServiceController extends Controller
         $this->authorize('update', $service);
 
         $service->update([
-            'canceled_at' => now()
+            'canceled_at' => now(),
         ]);
 
         return back()->with(['success' => $service->name.' has been canceled.']);
@@ -217,6 +215,6 @@ class VehicleServiceController extends Controller
 
         $service->delete();
 
-        return back()->with(['success' => "Successfully Deleted. Vehicle Service ID: ".$vehicle->id]);
+        return back()->with(['success' => 'Successfully Deleted. Vehicle Service ID: '.$vehicle->id]);
     }
 }
