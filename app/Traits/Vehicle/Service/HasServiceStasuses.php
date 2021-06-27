@@ -49,6 +49,16 @@ trait HasServiceStasuses{
     }
 
     /**
+     * If service is serviced
+     *
+     * @return boolean
+    */
+    public function isServiced()
+    {
+        return isset($this->serviced_at);
+    }
+
+    /**
      * Get service status type
      *
      * @return string
