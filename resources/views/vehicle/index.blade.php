@@ -35,13 +35,13 @@
                 @foreach ($vehicles as $vehicle)
                 <div class="md:w-1/3 text-center p-2">
                     <a href="{{ route('vehicles.show', $vehicle) }}">
-                        <x-card width="max-w-xs md:max-w-sm" class="ring-1 ring-indigo-50 hover:ring-2 hover:ring-indigo-50 ring-opacity-75 group transition-all duration-300 ease-in-out transform hover:-translate-y-2">
+                        <x-card width="max-w-xs md:max-w-sm" class="mx-auto ring-1 ring-indigo-50 hover:ring-2 hover:ring-indigo-50 ring-opacity-75 group transition-all duration-300 ease-in-out transform hover:-translate-y-2">
                             <x-slot name="body">
-                                <div class="px-6 py-4">
+                                <div class="px-3 lg:px-6 py-4">
                                     <div class="flex justify-between items-start">
                                         <div class="left flex items-center">
 
-                                            <div class="flex items-center justify-items-center bg-indigo-100 bg-opacity-25 p-1 rounded-full w-16 h-16 mr-2 border-2 border-indigo-100 border-opacity-50">
+                                            <div class="flex items-center justify-items-center bg-indigo-100 bg-opacity-25 p-1 rounded-full w-12 h-12 lg:w-16 lg:h-16 mr-2 border-2 border-indigo-100 border-opacity-50">
                                                 @if ($vehicle->category->isTwoWheeler())
                                                     <img src="{{ asset('images/bike/bike-image.svg') }}" alt="Bike" class="inline-flex mr-3">
                                                 @endif
@@ -53,7 +53,7 @@
 
                                             <div class="details inline-flex flex-col items-start pt-1">
                                                 <div class="text-xs text-indigo-600 font-semibold">{{$vehicle->category->name }}</div>
-                                                <h4 class="text-xl font-semibold">{{ __($vehicle->model) }}</h4>
+                                                <h4 class="text-md lg:text-xl font-semibold">{{ __($vehicle->model) }}</h4>
                                                 <span class="bg-gray-100 px-2 py-1 text-xs rounded font-semibold">{{ $vehicle->rc }}</span>
                                             </div>
                                         </div>

@@ -12,11 +12,11 @@
 
             <x-card width="sm:max-w-lg" class="mx-auto">
                 <x-slot name="body">
-                    <div class="px-3 md:px-6 py-4">
+                    <div class="px-3 lg:px-6 py-4">
                         <div class="flex justify-between items-start">
                             <div class="left flex items-center">
 
-                                <div class="flex items-center justify-items-center bg-indigo-100 bg-opacity-25 p-1 rounded-full w-12 h-12 md:w-16 md:h-16 mr-2 group-hover:bg-white group-hover:border-2 group-hover:border-indigo-200 border-2 border-indigo-100 ring-2 ring-indigo-50 ring-opacity-25 group-hover:ring-opacity-75 group-hover:ring-indigo-100">
+                                <div class="flex items-center justify-items-center bg-indigo-100 bg-opacity-25 p-1 rounded-full w-12 h-12 md:w-14 md:h-14 mr-2 group-hover:bg-white group-hover:border-2 group-hover:border-indigo-200 border-2 border-indigo-100 ring-2 ring-indigo-50 ring-opacity-25 group-hover:ring-opacity-75 group-hover:ring-indigo-100">
                                     @if ($vehicle->category->isTwoWheeler())
                                     <img src="{{ asset('images/bike/bike-image.svg') }}" alt="Bike" class="inline-flex mr-3">
                                     @endif
@@ -29,7 +29,7 @@
                                 <div class="details inline-flex flex-col items-start pt-1">
                                     <div class="text-xs text-indigo-600 font-semibold">{{$vehicle->category->name }}</div>
                                     <h4 class="text-md md:text-xl font-semibold">{{ __($vehicle->model) }}</h4>
-                                    <span class="bg-gray-100 px-2 py-1 text-xs rounded font-semibold group-hover:bg-white border-2 border-gray-100 border-opacity-0 group-hover:border-opacity-100 group-hover:border-2 group-hover:border-gray-100">{{ $vehicle->rc }}</span>
+                                    <span class="bg-gray-100 px-2 py-1 text-xs rounded font-semibold border-2 border-gray-100 border-opacity-0">{{ $vehicle->rc }}</span>
                                 </div>
                             </div>
                             <div class="right flex flex-col justify-between">
