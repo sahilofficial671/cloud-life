@@ -85,18 +85,13 @@
                                 });
                             @endphp
                             @foreach ($items as $service)
-                            @php
-                                $color = $service->isPending() ? 'indigo' : 'green';
-                                $textOpacity = $service->isPending() ? '100' : '50';
-
-                                if($service->isCanceled()){
-                                    $color = 'red';
-                                }
-                            @endphp
                             <div class="flex justify-between items-start py-2 md:py-4 px-3 md:px-6 my-2 border-b-2 border-gray-100" x-data="{ isDescriptionActive: false }">
                                 <div class="w-7/12 sm:w-6/12 flex items-start">
-                                    <div class="relative bg-{{$color}}-50 bg-opacity-50 ring-1 ring-opacity-25 border-2 border-{{$color}}-100 border-opacity-75 ring-{{$color}}-50 w-14 h-11 md:w-14 md:h-14 mr-3 flex justify-items-center items-center rounded-full">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-5 text-opacity-{{$textOpacity}} sm:w-6 sm:h-6 mx-auto text-{{$color}}-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <div class="relative bg-opacity-50 ring-1 ring-opacity-25 border-2 border-opacity-75 w-14 h-11 md:w-14 md:h-14 mr-3 flex justify-items-center items-center rounded-full {{ $service->isPending() ? 'bg-indigo-50 ring-indigo-50 border-indigo-100' : ''}}
+                                    {{ ($service->isCompleted() || $service->isServiced()) ? 'bg-green-50 ring-green-50 border-green-100' : ''}} {{ $service->isCanceled() ? 'bg-red-50 ring-red-50 border-red-100' : ''}}">
+
+                                        <svg class="h-6 w-5 sm:w-6 sm:h-6 mx-auto {{ $service->isPending() ? 'text-opacity-100 text-indigo-500' : ''}} {{ ($service->isCompleted() || $service->isServiced()) ? 'text-opacity-50 text-green-500' : ''}} {{ $service->isCanceled() ? 'text-opacity-50 text-red-500' : ''}}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                         </svg>
@@ -109,14 +104,14 @@
                                     </div>
 
                                     <div class="details inline-flex flex-col items-start pt-0.5 sm:pt-2">
-                                        <div class="text-md text-{{$color}}-600 text-opacity-{{$textOpacity}} font-semibold break-words">{{$service->name }}</div>
+                                        <div class="text-md font-semibold break-words {{ $service->isPending() ? 'text-opacity-100 text-indigo-600' : ''}} {{ ($service->isCompleted() || $service->isServiced()) ? 'text-opacity-50 text-green-600' : ''}} {{ $service->isCanceled() ? 'text-opacity-50 text-red-600' : ''}}">{{$service->name }}</div>
                                         <div class="flex items-center mt-0.5 sm:mt-1">
                                             <div class="inline-flex mr-1">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 -mt-0.5 text-{{$color}}-500 text-opacity-{{$textOpacity}}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 -mt-0.5 {{ $service->isPending() ? 'text-opacity-100 text-indigo-500' : ''}} {{ ($service->isCompleted() || $service->isServiced()) ? 'text-opacity-50 text-green-500' : ''}} {{ $service->isCanceled() ? 'text-opacity-50 text-red-500' : ''}}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                                 </svg>
                                             </div>
-                                            <span class="text-xs font-semibold sm:text-sm text-gray-700 text-opacity-{{$textOpacity}}">
+                                            <span class="text-xs font-semibold sm:text-sm text-gray-700 {{ $service->isPending() ? 'text-opacity-100' : ''}} {{ ($service->isCompleted() || $service->isServiced()) ? 'text-opacity-50' : ''}} {{ $service->isCanceled() ? 'text-opacity-50' : ''}}">
                                                 {{
                                                     $service->isPending()
                                                         ?  $service->scheduledAt()->toFormattedDateString()
@@ -287,7 +282,7 @@
                                             <div class="mr-1">
                                                 <div class="inline-flex">
                                                     <p class="mr-2 text-gray-600 font-semibold">Scheduled On:</p>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-{{$color}}-500 text-opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-opacity-100 {{ $service->isPending() ? 'text-indigo-500' : ''}} {{ ($service->isCompleted() || $service->isServiced()) ? 'text-green-500' : ''}} {{ $service->isCanceled() ? 'text-red-500' : ''}}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                                     </svg>
                                                     <span class="text-xs font-semibold sm:text-sm">
@@ -301,7 +296,7 @@
                                                     <p class="mr-2 text-gray-600 font-semibold">
                                                         {{ ! $service->isCanceled() ? 'Serviced On: ' : 'Canceled On: '}}
                                                     </p>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-{{$color}}-500 text-opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-opacity-100 {{ $service->isPending() ? 'text-indigo-500' : ''}} {{ ($service->isCompleted() || $service->isServiced()) ? 'text-green-500' : ''}} {{ $service->isCanceled() ? 'text-red-500' : ''}}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                                         </svg>
 
@@ -322,7 +317,7 @@
                                             <div class="mr-1">
                                                 <div class="inline-flex">
                                                     <p class="mr-2 text-gray-600 font-semibold">Created At:</p>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-{{$color}}-500 text-opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-opacity-100 {{ $service->isPending() ? 'text-indigo-500' : ''}} {{ ($service->isCompleted() || $service->isServiced()) ? 'text-green-500' : ''}} {{ $service->isCanceled() ? 'text-red-500' : ''}}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                                         </svg>
                                                     <span class="text-xs font-semibold sm:text-sm">
@@ -334,7 +329,7 @@
                                             <div class="mr-1">
                                                 <div class="inline-flex">
                                                     <p class="mr-2 text-gray-600 font-semibold">Updated At:</p>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-{{$color}}-500 text-opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-opacity-100 {{ $service->isPending() ? 'text-indigo-500' : ''}} {{ ($service->isCompleted() || $service->isServiced()) ? 'text-green-500' : ''}} {{ $service->isCanceled() ? 'text-red-500' : ''}}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                                         </svg>
                                                     <span class="text-xs font-semibold sm:text-sm">
