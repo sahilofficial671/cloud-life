@@ -25,12 +25,12 @@ class VehicleSeeder extends Seeder
         ]);
 
         Vehicle::create([
-            'model'                   => collect(['Twister', 'Pulser', 'Apache 4v', 'Splender'])->random(),
+            'model'                   => 'Audi A2',
             'detail'                  => 'This is service description.',
-            'manufacturer'            => collect(['Honda', 'Bajaj', 'KTM', 'Royal Enfield', 'Hero'])->random(),
-            'rc'                      => collect(['KSUHF123EKJ', 'EWIRUYIUB', 'AKFGGBTRYO2'])->random(),
+            'manufacturer'            => 'Audi',
+            'rc'                      => 'KSUHF123EKJ',
             'monthly_service_in_days' => 30,
-            'category_id'             => collect([1, 2])->random(),
+            'category_id'             => 2,
             'user_id'                 => 1
         ]);
     }
