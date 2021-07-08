@@ -1,7 +1,8 @@
 @props([
-    'type'   => 'info',
-    'toggle' => 'false',
-    'cancel' => 'Cancel',
+    'type'              => 'info',
+    'toggle'            => 'false',
+    'defaultCancelText' => 'Cancel',
+    'defaultCancel'     => true,
 ])
 
 @php
@@ -37,11 +38,11 @@
 
         <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
-        <div class="inline-block align-middle bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all mb-10 sm:my-8 w-11/12 sm:w-full sm:max-w-lg">
+        <div class="inline-block align-middle bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all mb-10 lg:mb-20 sm:my-8 w-11/12 sm:w-full sm:max-w-lg">
             <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div class="sm:flex sm:items-start">
                     <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full sm:mx-0 sm:h-10 sm:w-10 {!! $class['icon_container_class'] !!}">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 {!! $class['icon_class'] !!}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto {!! $class['icon_class'] !!}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{!! $class['icon'] !!}" />
                     </svg>
                     </div>
@@ -56,8 +57,13 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                <x-button buttonType="light" value="{!! $cancel !!}" x-on:click="{{$toggle}} = ! {{$toggle}}"/>
+            <div class="bg-gray-50 px-4 py-3 sm:px-6 flex flex-row-reverse items-center">
+                @if ($defaultCancel)
+                    <x-button buttonType="light" value="{!! $defaultCancelText !!}" x-on:click="{{$toggle}} = ! {{$toggle}}"/>
+                @endif
+                @isset($footer)
+                    {!! $footer !!}
+                @endisset
             </div>
         </div>
     </div>
