@@ -388,20 +388,6 @@
 
                                         @endif
                                     @endif
-                                    <a href="{{ route('vehicles.services.edit', [ 'vehicle' => $vehicle, 'service' => $service]) }}" x-data="{ tooltip: false }" class="relative inline-block">
-                                        <x-button class="w-7 sm:w-10" height="h-8 sm:h-9" buttonType="warning-light" padding="px-1 sm:px-2.5" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 s:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                              </svg>
-                                        </x-button>
-
-                                        <div class="z-50">
-                                            <div class="absolute text-center -top-10 -left-2 z-50 w-12 md:w-12 px-2 py-1 text-sm leading-tight transform transition duration-500 ease-in-out bg-gray-700 text-gray-100 border-gray-500 border-2 rounded shadow-sm"
-                                            x-show="tooltip">
-                                                <span class="font-semibold">Edit</span>
-                                            </div>
-                                        </div>
-                                    </a>
                                     <div x-on:click="isDescriptionActive = ! isDescriptionActive" class="relative inline-block">
                                         <a x-data="{ tooltip: false }">
                                             <x-button class="w-7 sm:w-10" height="h-8 sm:h-9" buttonType="light" padding="px-1 sm:px-2.5" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
@@ -464,9 +450,19 @@
                                                 </h3>
                                             </div>
 
-                                            <div class="font-semibold bg-gray-100 px-2 py-1 text-xs rounded border-2 border-gray-100 border-opacity-0 w-14 sm:w-auto h-7">
-                                                ID: {{ $service->id }}
+                                            <div class="flex items-start">
+                                                <div class="font-semibold bg-gray-100 px-2 py-1 text-xs rounded border-2 border-gray-100 border-opacity-0 w-14 sm:w-auto h-7 mr-2">
+                                                    ID: {{ $service->id }}
+                                                </div>
+                                                <a href="{{ route('vehicles.services.edit', [ 'vehicle' => $vehicle, 'service' => $service]) }}" class="relative inline-block">
+                                                    <x-button class="w-7 sm:w-10" height="h-8 sm:h-9" buttonType="warning-light" padding="px-1 sm:px-2.5">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 s:w-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                                          </svg>
+                                                    </x-button>
+                                                </a>
                                             </div>
+
                                         </div>
                                     </x-slot>
                                     <x-slot name="body">
