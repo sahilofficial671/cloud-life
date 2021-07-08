@@ -41,7 +41,7 @@
 
 
                                 <div class="flex items-center">
-                                    <div x-data="{ isViewActive: false }">
+                                    <div x-data="{ isViewActive: false }" class="-mb-0.5">
                                         <div class="relative mr-1"  x-on:click="isViewActive = ! isViewActive">
                                             <a x-data="{ tooltip: false }">
                                                 <x-button height="h-7" buttonType="light" padding="px-2 sm:px-2.5" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false" class="mt-5">
