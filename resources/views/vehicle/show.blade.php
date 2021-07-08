@@ -303,7 +303,7 @@
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                                     </svg>
                                                 </div>
-                                                <span class="text-xs font-semibold sm:text-sm text-gray-700 {{ $service->isPending() ? 'text-opacity-100' : ''}} {{ ($service->isCompleted() || $service->isServiced()) ? 'text-opacity-50' : ''}} {{ $service->isCanceled() ? 'text-opacity-50' : ''}}">
+                                                <span class="text-sm font-semibold text-gray-700 {{ $service->isPending() ? 'text-opacity-100' : ''}} {{ ($service->isCompleted() || $service->isServiced()) ? 'text-opacity-50' : ''}} {{ $service->isCanceled() ? 'text-opacity-50' : ''}}">
                                                     {{
                                                         $service->isPending()
                                                             ?  $service->scheduledAt()->toFormattedDateString()
