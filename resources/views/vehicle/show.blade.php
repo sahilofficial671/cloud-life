@@ -45,7 +45,7 @@
                                         <div class="relative mr-1"  x-on:click="isViewActive = ! isViewActive">
                                             <a x-data="{ tooltip: false }">
                                                 <x-button height="h-7" buttonType="light" padding="px-2 sm:px-2.5" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false" class="mt-5">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 s:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                                     </svg>
                                                 </x-button>
@@ -58,7 +58,6 @@
                                                 </div>
                                             </a>
                                         </div>
-
 
                                         <x-modal x-show="isViewActive" toggle="isViewActive" type="info">
                                             <x-slot name="header">
@@ -191,8 +190,9 @@
                                         <div class="flex items-center">
                                             <x-button class="sm:w-10" height="h-8 sm:h-9" buttonType="primary-light" padding="px-1 sm:px-2.5">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                                                 </svg>
+
                                             </x-button>
 
                                             <span class="ml-3 font-semibold">Mark Serviced. This will also create next service.</span>
@@ -201,7 +201,7 @@
                                         <div class="flex items-center">
                                             <x-button class="sm:w-10" height="h-8 sm:h-9" buttonType="secondary" padding="px-1 sm:px-2.5">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                                 </svg>
                                             </x-button>
 
@@ -219,7 +219,7 @@
 
                                         <div class="flex items-center">
                                             <x-button class="sm:w-10" height="h-8 sm:h-9" buttonType="warning-light" padding="px-1 sm:px-2.5">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 s:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                                                   </svg>
                                             </x-button>
@@ -228,16 +228,16 @@
 
                                         <div class="flex items-center">
                                             <x-button class="sm:w-10" height="h-8 sm:h-9" buttonType="light" padding="px-1 sm:px-2.5">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 s:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                                 </svg>
                                             </x-button>
-                                            <span class="ml-3 font-semibold">View service.</span>
+                                            <span class="ml-3 font-semibold">View details.</span>
                                         </div>
 
                                         <div class="flex items-center">
                                             <x-button class="sm:w-10" height="h-8 sm:h-9" buttonType="danger-light" padding="px-1 sm:px-2.5">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 s:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                                 </svg>
                                             </x-button>
@@ -318,9 +318,9 @@
                                     @if ($service->isPending())
                                         @if ($service->isMonthly())
                                             <a href="{{ route('vehicles.services.serviced', [ 'vehicle' => $vehicle, 'service' => $service]) }}" x-data="{ tooltip: false }" class="relative inline-block">
-                                                <x-button class="w-7 sm:w-10" height="h-8 sm:h-9" buttonType="primary-light" padding="px-1 sm:px-2.5" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                <x-button class="w-8 sm:w-10" height="h-8 sm:h-9" buttonType="secondary" padding="px-1 sm:px-2.5" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                                                     </svg>
                                                 </x-button>
 
@@ -331,29 +331,46 @@
                                                     </div>
                                                 </div>
                                             </a>
-                                        @endif
 
-                                        <a href="{{ route('vehicles.services.complete', [ 'vehicle' => $vehicle, 'service' => $service]) }}" x-data="{ tooltip: false }" class="relative inline-block">
-                                            <x-button class="w-7 sm:w-10" height="h-8 sm:h-9" buttonType="secondary" padding="px-1 sm:px-2.5" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-                                                </svg>
-                                            </x-button>
+                                            <a href="{{ route('vehicles.services.complete', [ 'vehicle' => $vehicle, 'service' => $service]) }}" x-data="{ tooltip: false }" class="relative inline-block">
+                                                <x-button class="w-8 sm:w-10" height="h-8 sm:h-9" buttonType="primary-light" padding="px-1 sm:px-2.5" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                </x-button>
 
-                                            <div class="z-50">
-                                                <div class="absolute text-center -top-14 left-2 z-50 w-32 md:w-52 px-2 py-1 text-sm leading-tight transform transition duration-500 ease-in-out   -translate-x-1/2 bg-gray-700 text-gray-100 border-gray-500 border-2 rounded shadow-sm"
-                                                x-show="tooltip">
-                                                <span class="font-semibold">Mark Completed</span>
-                                                <br />
-                                                <span class="text-xs text-gray-400 pl-2">Service will be completed.</span>
+                                                <div class="z-50">
+                                                    <div class="absolute text-center -top-14 left-2 z-50 w-32 md:w-52 px-2 py-1 text-sm leading-tight transform transition duration-500 ease-in-out   -translate-x-1/2 bg-gray-700 text-gray-100 border-gray-500 border-2 rounded shadow-sm"
+                                                    x-show="tooltip">
+                                                    <span class="font-semibold">Mark Completed</span>
+                                                    <br />
+                                                    <span class="text-xs text-gray-400 pl-2">Service will be completed.</span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </a>
+                                            </a>
+                                        @else
+                                            <a href="{{ route('vehicles.services.complete', [ 'vehicle' => $vehicle, 'service' => $service]) }}" x-data="{ tooltip: false }" class="relative inline-block">
+                                                <x-button class="w-8 sm:w-10" height="h-8 sm:h-9" buttonType="primary-light" padding="px-1 sm:px-2.5" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                </x-button>
+
+                                                <div class="z-50">
+                                                    <div class="absolute text-center -top-14 left-2 z-50 w-32 md:w-52 px-2 py-1 text-sm leading-tight transform transition duration-500 ease-in-out   -translate-x-1/2 bg-gray-700 text-gray-100 border-gray-500 border-2 rounded shadow-sm"
+                                                    x-show="tooltip">
+                                                    <span class="font-semibold">Mark Completed</span>
+                                                    <br />
+                                                    <span class="text-xs text-gray-400 pl-2">Service will be completed.</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        @endif
 
                                         <a href="{{ route('vehicles.services.cancel', [ 'vehicle' => $vehicle, 'service' => $service]) }}" x-data="{ tooltip: false }" class="relative inline-block">
 
-                                            <x-button class="w-7 sm:w-10" height="h-8 sm:h-9" buttonType="danger-light" padding="px-1 sm:px-2.5" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <x-button class="w-8 sm:w-10" height="h-8 sm:h-9" buttonType="danger-light" padding="px-1 sm:px-2.5" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                                                 </svg>
                                             </x-button>
@@ -368,8 +385,8 @@
                                     @else
                                         @if ($service->isCanceled())
                                         <a class="inline-block">
-                                            <x-button class="w-7 sm:w-10" height="h-8 sm:h-9" type="submit" buttonType="danger-light" padding="px-1 sm:px-2.5" disabled="disabled">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <x-button class="w-8 sm:w-10" height="h-8 sm:h-9" type="submit" buttonType="danger-light" padding="px-1 sm:px-2.5" disabled="disabled">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                                                 </svg>
                                             </x-button>
@@ -379,8 +396,8 @@
 
                                         @if (($service->isCompleted() || $service->isNotPending()) && ! $service->isCanceled())
                                         <a class="inline-block">
-                                            <x-button class="w-7 sm:w-10" height="h-8 sm:h-9" buttonType="primary-light" padding="px-1 sm:px-2.5" disabled="disabled" class="sm:h-9 sm:px-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <x-button class="w-8 sm:w-10" height="h-8 sm:h-9" buttonType="primary-light" padding="px-1 sm:px-2.5" disabled="disabled" class="sm:h-9 sm:px-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                                 </svg>
                                             </x-button>
@@ -390,8 +407,8 @@
                                     @endif
                                     <div x-on:click="isDescriptionActive = ! isDescriptionActive" class="relative inline-block">
                                         <a x-data="{ tooltip: false }">
-                                            <x-button class="w-7 sm:w-10" height="h-8 sm:h-9" buttonType="light" padding="px-1 sm:px-2.5" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 s:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <x-button class="w-8 sm:w-10" height="h-8 sm:h-9" buttonType="light" padding="px-1 sm:px-2.5" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                                 </svg>
                                             </x-button>
@@ -404,26 +421,6 @@
                                             </div>
                                         </a>
                                     </div>
-
-                                    <a x-data="{ tooltip: false }" class="relative inline-block">
-                                        <form method="POST" action="{{route('vehicles.services.destroy', [ 'vehicle' => $vehicle, 'service' => $service])}}">
-                                            @csrf
-                                            <input type="hidden" name="_method" value="delete" />
-                                            <x-button class="w-7 sm:w-10" height="h-8 sm:h-9" buttonType="danger-light" padding="px-1 sm:px-2.5" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false"  onclick="event.preventDefault();
-                                            this.closest('form').submit();">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 s:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                </svg>
-                                            </x-button>
-                                        </form>
-
-                                        <div class="z-50">
-                                            <div class="absolute text-center -top-10 -left-3 z-50 w-14 md:w-16 px-2 py-1 text-sm leading-tight transform transition duration-500 ease-in-out bg-gray-700 text-gray-100 border-gray-500 border-2 rounded shadow-sm"
-                                            x-show="tooltip">
-                                                <span class="font-semibold">Delete</span>
-                                            </div>
-                                        </div>
-                                    </a>
                                 </div>
                                 @php
                                     $type = 'info';
@@ -450,19 +447,13 @@
                                                 </h3>
                                             </div>
 
-                                            <div class="flex items-start">
-                                                <div class="font-semibold bg-gray-100 px-2 py-1 text-xs rounded border-2 border-gray-100 border-opacity-0 w-14 sm:w-auto h-7 mr-2">
-                                                    ID: {{ $service->id }}
-                                                </div>
-                                                <a href="{{ route('vehicles.services.edit', [ 'vehicle' => $vehicle, 'service' => $service]) }}" class="relative inline-block">
-                                                    <x-button class="w-7 sm:w-10" height="h-8 sm:h-9" buttonType="warning-light" padding="px-1 sm:px-2.5">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 s:w-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                                          </svg>
-                                                    </x-button>
-                                                </a>
-                                            </div>
-
+                                            <a href="{{ route('vehicles.services.edit', [ 'vehicle' => $vehicle, 'service' => $service]) }}" class="relative inline-block">
+                                                <x-button class="w-9" height="h-9" buttonType="warning-light" padding="px-1 sm:px-2.5">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                                      </svg>
+                                                </x-button>
+                                            </a>
                                         </div>
                                     </x-slot>
                                     <x-slot name="body">
@@ -471,18 +462,18 @@
 
                                             <div class="mr-1">
                                                 <div class="inline-flex">
-                                                    <p class="mr-2 text-gray-600 font-semibold">Vehicle:</p>
-                                                    <span class="text-xs font-semibold sm:text-sm">
-                                                        {{ $vehicle->model }}
+                                                    <p class="mr-2 text-gray-600 font-semibold">Service ID:</p>
+                                                    <span class="text-sm font-semibold">
+                                                        {{ $service->id }}
                                                     </span>
                                                 </div>
                                             </div>
 
                                             <div class="mr-1">
                                                 <div class="inline-flex">
-                                                    <p class="mr-2 text-gray-600 font-semibold">Manufacturer:</p>
-                                                    <span class="text-xs font-semibold sm:text-sm">
-                                                        {{ $vehicle->manufacturer }}
+                                                    <p class="mr-2 text-gray-600 font-semibold">Vehicle:</p>
+                                                    <span class="text-sm font-semibold">
+                                                        {{ $vehicle->model }}
                                                     </span>
                                                 </div>
                                             </div>
@@ -493,7 +484,7 @@
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-opacity-100 {{ $service->isPending() ? 'text-indigo-500' : ''}} {{ ($service->isCompleted() || $service->isServiced()) ? 'text-green-500' : ''}} {{ $service->isCanceled() ? 'text-red-500' : ''}}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                                     </svg>
-                                                    <span class="text-xs font-semibold sm:text-sm">
+                                                    <span class="text-sm font-semibold">
                                                         {{ $service->scheduledAt()->toFormattedDateString() }}
                                                     </span>
                                                 </div>
@@ -509,12 +500,12 @@
                                                         </svg>
 
                                                         @if (! $service->isCanceled())
-                                                        <span class="text-xs font-semibold sm:text-sm">
+                                                        <span class="text-sm font-semibold">
                                                             {{ $service->isNotPending() ? $service->scheduledAt()->toFormattedDateString() : 'NA'}}
                                                         </span>
 
                                                         @else
-                                                        <span class="text-xs font-semibold sm:text-sm">
+                                                        <span class="text-sm font-semibold">
                                                             {{ $service->canceledAt()->toFormattedDateString()}}
                                                         </span>
                                                         @endif
@@ -528,7 +519,7 @@
                                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-opacity-100 {{ $service->isPending() ? 'text-indigo-500' : ''}} {{ ($service->isCompleted() || $service->isServiced()) ? 'text-green-500' : ''}} {{ $service->isCanceled() ? 'text-red-500' : ''}}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                                         </svg>
-                                                    <span class="text-xs font-semibold sm:text-sm">
+                                                    <span class="text-sm font-semibold">
                                                         {{ $service->createdAt()->toFormattedDateString()}}
                                                     </span>
                                                 </div>
@@ -540,13 +531,34 @@
                                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-opacity-100 {{ $service->isPending() ? 'text-indigo-500' : ''}} {{ ($service->isCompleted() || $service->isServiced()) ? 'text-green-500' : ''}} {{ $service->isCanceled() ? 'text-red-500' : ''}}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                                         </svg>
-                                                    <span class="text-xs font-semibold sm:text-sm">
+                                                    <span class="text-sm font-semibold">
                                                         {{ $service->updatedAt()->toFormattedDateString()}}
                                                     </span>
                                                 </div>
                                             </div>
 
                                         </div>
+                                    </x-slot>
+                                    <x-slot name="footer">
+                                        <a x-data="{ tooltip: false }" class="relative inline-block mr-2">
+                                            <form method="POST" action="{{route('vehicles.services.destroy', [ 'vehicle' => $vehicle, 'service' => $service])}}">
+                                                @csrf
+                                                <input type="hidden" name="_method" value="delete" />
+                                                <x-button class="w-10" buttonType="danger-light" padding="px-1 sm:px-2.5" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false"  onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                    </svg>
+                                                </x-button>
+                                            </form>
+
+                                            <div class="z-50">
+                                                <div class="absolute text-center -top-10 -left-3 z-50 w-14 md:w-16 px-2 py-1 text-sm leading-tight transform transition duration-500 ease-in-out bg-gray-700 text-gray-100 border-gray-500 border-2 rounded shadow-sm"
+                                                x-show="tooltip">
+                                                    <span class="font-semibold">Delete</span>
+                                                </div>
+                                            </div>
+                                        </a>
                                     </x-slot>
                                 </x-modal>
                             </div>
