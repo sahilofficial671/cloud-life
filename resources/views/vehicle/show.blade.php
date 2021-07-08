@@ -384,25 +384,23 @@
                                         </a>
                                     @else
                                         @if ($service->isCanceled())
-                                        <a class="inline-block">
-                                            <x-button class="w-8 sm:w-10" height="h-8 sm:h-9" type="submit" buttonType="danger-light" padding="px-1 sm:px-2.5" disabled="disabled">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                                </svg>
-                                            </x-button>
-                                        </a>
-
+                                            <a class="inline-block">
+                                                <x-button class="w-8 sm:w-10" height="h-8 sm:h-9" type="submit" buttonType="danger-light" padding="px-1 sm:px-2.5" disabled="disabled">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                                    </svg>
+                                                </x-button>
+                                            </a>
                                         @endif
 
                                         @if (($service->isCompleted() || $service->isNotPending()) && ! $service->isCanceled())
-                                        <a class="inline-block">
-                                            <x-button class="w-8 sm:w-10" height="h-8 sm:h-9" buttonType="primary-light" padding="px-1 sm:px-2.5" disabled="disabled" class="sm:h-9 sm:px-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                </svg>
-                                            </x-button>
-                                        </a>
-
+                                            <a class="inline-block">
+                                                <x-button class="w-8 sm:w-10" height="h-8 sm:h-9" buttonType="primary-light" padding="px-1 sm:px-2.5" disabled="disabled">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 sm:w-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                </x-button>
+                                            </a>
                                         @endif
                                     @endif
                                     <div x-on:click="isDescriptionActive = ! isDescriptionActive" class="relative inline-block">
