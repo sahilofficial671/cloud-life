@@ -42,11 +42,11 @@
             <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div class="sm:flex sm:items-start">
                     <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full sm:mx-0 sm:h-10 sm:w-10 {!! $class['icon_container_class'] !!}">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto {!! $class['icon_class'] !!}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{!! $class['icon'] !!}" />
-                    </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto {!! $class['icon_class'] !!}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{!! $class['icon'] !!}" />
+                        </svg>
                     </div>
-                    <div class="w-full mt-3 sm:mt-0 sm:ml-4 sm:text-left">
+                    <div class="w-full mt-6 sm:mt-0 sm:ml-4 sm:text-left">
                         @isset($header)
                             {!! $header !!}
                         @endisset
