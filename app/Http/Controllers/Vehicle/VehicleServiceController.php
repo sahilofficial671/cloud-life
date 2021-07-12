@@ -128,7 +128,7 @@ class VehicleServiceController extends Controller
             'name'          => ['required', 'string'],
             'description'   => ['required', 'string'],
             'scheduled_at'  => ['required', 'date_format:Y-m-d'],
-            'serviced_at'   => ['date_format:Y-m-d'],
+            'serviced_at'   => ['nullable', 'date_format:Y-m-d'],
             'type_id'       => ['required', Rule::in(VehicleService::getTypes()->keys())],
         ], [
             'type_id.in'    => 'Please select valid service type.',

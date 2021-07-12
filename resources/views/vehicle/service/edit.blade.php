@@ -12,6 +12,7 @@
                     <x-slot name="header">
                         {{ __('Update Vehicle Service') }}
                     </x-slot>
+
                     <x-slot name="body">
                         <form method="POST" action="{{ route('vehicles.services.update', [ 'vehicle' => $vehicle, 'service' => $service]) }}" class="px-6 py-4">
                             @csrf
@@ -25,8 +26,17 @@
 
                             <div class="mb-3 sm:mb-6 space-y-4">
                                 <div x-data="dateTime()" x-init="[initDate(), getNoOfDays()]" x-cloak>
-                                    <x-label for="serviced_at" :value="__('Serviced On')" x-text="'Serviced On'"/>
-                                    <x-datetime name="serviced_at" value="{!! $service->servicedAt()->toDateString() !!}" />
+
+                                    <div class="pt-3 mb-3 sm:mb-6 flex items-center">
+                                        <x-input type="checkbox" x-ref="isServiced" class="mr-2" x-on:click="toggleIsServiced()" x-click="toggleIsServiced()" />
+                                        <x-label for="isServiced" :value="$service->isPending() ?  'Is Serviced ?' : 'Is Not Serviced?'" />
+                                    </div>
+
+                                    <div x-show="isServiced">
+                                        <x-label for="serviced_at" :value="__('Serviced On')" x-text="'Serviced On'"/>
+                                        <x-datetime name="serviced_at" value="{!! $service->servicedAt()->toDateString() !!}" />
+                                    </div>
+
                                 </div>
                             </div>
 
@@ -66,10 +76,14 @@
 
         function dateTime() {
             return {
-                isPastService: false,
+                isServiced: {{ $service->isServiced() ? 'true' : 'false'}},
                 showDatepicker: false,
                 datepickerValue: '',
-
+                toggleIsServiced(){
+                    this.isServiced = ! this.isServiced;
+                    if(this.isServiced == true) this.setSelectedDate();
+                    if(this.isServiced == false) this.$refs.date.value = null;
+                },
                 month: '',
                 year: '',
                 selectedDate: null,
@@ -81,7 +95,13 @@
                     const d = new Date(this.year, this.month, date);
                     return this.datepickerValue === d.toDateString() ? true : false;
                 },
-
+                setSelectedDate(){
+                    date = this.selectedDate;
+                    this.month = date.getMonth();
+                    this.year = date.getFullYear();
+                    this.datepickerValue = date.toDateString();
+                    this.$refs.date.value = date.getFullYear() +"-"+ ('0' + (date.getMonth() + 1)).slice(-2) +"-"+ ('0' + date.getDate()).slice(-2);
+                },
                 initDate() {
                     if(this.$refs.date.value == '' || this.$refs.date.value == undefined){
                         let today = new Date();
